@@ -253,3 +253,20 @@ h5 {
 		gap: 12rem;
 	}
 }
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+thead th {
+	border: 1px solid black;
+	padding: 8px;
+	width: 50%;
+}
+
+tbody tr td {
+	border: 1px solid black;
+	padding: 8px;
+	width: 50%;
+}
