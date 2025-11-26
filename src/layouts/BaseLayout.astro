@@ -18,15 +18,19 @@ const { title, description } = Astro.props;
 
 <html lang="en">
 	<head>
+		<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Summer Young: Personal Site</title>
+	</head>
+	<header>
 		<MainHead title={title} description={description} />
 		<ClientRouter />
-	</head>
+		<Nav />
+	</header>
 	<body>
-		<div class="stack">
-			<Nav />
-			<slot />
-			<Footer />
-		</div>
+		<slot />
+		<Footer />
 
 		<script>
 			// Add “loaded” class once the document has completely loaded.

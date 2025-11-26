@@ -29,11 +29,16 @@ const { headings } = Astro.props;
 
 <style>
   .table-of-contents {
+    position: sticky;
+    top: 2rem;
     width: 250px;
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
     padding: 1.5rem;
     background: var(--gray-999);
     border: 1px solid var(--gray-800);
     border-radius: 0.75rem;
+    z-index: 100;
   }
 
   .toc-title {
@@ -84,6 +89,16 @@ const { headings } = Astro.props;
     color: var(--accent-regular);
     background: var(--accent-subtle-overlay);
     font-weight: 600;
+  }
+
+  /* Mobile: static positioning, full width */
+  @media (max-width: 768px) {
+    .table-of-contents {
+      position: static;
+      width: 100%;
+      max-height: none;
+      overflow-y: visible;
+    }
   }
 </style>
 
