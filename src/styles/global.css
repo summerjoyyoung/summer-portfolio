@@ -117,11 +117,6 @@
 
 html,
 body {
-	min-height: 100%;
-	overflow-x: hidden;
-}
-
-body {
 	background-color: var(--gray-999);
 	color: var(--gray-200);
 	font-family: var(--font-body);

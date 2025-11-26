@@ -19,16 +19,16 @@ const { title, description } = Astro.props;
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width" />
 
-    <title>Summer Young: Personal Site</title>
+		<title>Summer Young: Personal Site</title>
 	</head>
-	<header>
-		<MainHead title={title} description={description} />
-		<ClientRouter />
-		<Nav />
-	</header>
 	<body>
+		<header>
+			<MainHead title={title} description={description} />
+			<ClientRouter />
+			<Nav />
+		</header>
 		<slot />
 		<Footer />
 

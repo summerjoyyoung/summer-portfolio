@@ -43,18 +43,16 @@ const headings: Heading[] = rawHeadings
 
 <BaseLayout title={entry.data.title} description={entry.data.description}>
 	<main class="page-layout">
-		<div class="page-header">
-			<div class="wrapper">
-				<a class="back-link" href="/work/"><Icon icon="arrow-left" /> Work</a>
-				<Hero title={entry.data.title} align="start">
-					<div class="details">
-						<div class="tags">
-							{entry.data.tags.map((t) => <Pill>{t}</Pill>)}
-						</div>
-						<p class="description">{entry.data.description}</p>
+		<div class="page-header wrapper">
+			<a class="back-link" href="/work/"><Icon icon="arrow-left" /> Work</a>
+			<Hero title={entry.data.title} align="start">
+				<div class="details">
+					<div class="tags">
+						{entry.data.tags.map((t) => <Pill>{t}</Pill>)}
 					</div>
-				</Hero>
-			</div>
+					<p class="description">{entry.data.description}</p>
+				</div>
+			</Hero>
 		</div>
 		<div class="page-content">
 			{headings.length > 0 && (
@@ -76,6 +74,7 @@ const headings: Heading[] = rawHeadings
 		padding-bottom: 2.5rem;
 		border-bottom: 1px solid var(--gray-800);
 		margin-bottom: 3.75rem;
+		padding-inline: 0rem;
 	}
 
 	.back-link {
@@ -104,17 +103,14 @@ const headings: Heading[] = rawHeadings
 	
 	/* Simple two-column layout */
 	.page-layout {
-		height: 100vh;
-		overflow-y: auto;
 		display: flex;
 		flex-direction: column;
 		gap: 2rem;
-		max-width: 1200px;
 		margin: 0 auto;
-		padding: 0 1.5rem;
+		padding: 0 5rem;
 		margin-bottom: 5rem;
-		min-height: 100vh;
 		align-items: flex-start;
+		min-height: calc(100vh - 101px);
 	}
 
 	.page-content {
@@ -131,7 +127,6 @@ const headings: Heading[] = rawHeadings
 	.main-content {
 		flex: 1;
 		min-width: 0;
-		max-width: 65ch;
 	}
 
 	.hero-image {
