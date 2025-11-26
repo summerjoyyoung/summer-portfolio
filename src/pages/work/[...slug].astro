@@ -7,6 +7,7 @@ import ContactCTA from '../../components/ContactCTA.astro';
 import Hero from '../../components/Hero.astro';
 import Icon from '../../components/Icon.astro';
 import Pill from '../../components/Pill.astro';
+import TableOfContents, { type Heading } from '../../components/TableOfContents.astro';
 
 interface Props {
 	entry: CollectionEntry<'work'>;
@@ -24,7 +25,20 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, headings: rawHeadings } = await entry.render();
+
+// Extract H2 and H3 headings for table of contents
+function createSlug(text: string): string {
+	return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
+const headings: Heading[] = rawHeadings
+	.filter((heading: any) => heading.depth === 2 || heading.depth === 3)
+	.map((heading: any) => ({
+		id: createSlug(heading.text),
+		text: heading.text,
+		level: heading.depth,
+	}));
 ---
 
 <BaseLayout title={entry.data.title} description={entry.data.description}>
@@ -44,10 +58,19 @@ const { Content } = await entry.render();
 				</div>
 			</header>
 			<main class="wrapper">
-				<div class="stack gap-10 content">
-					{entry.data.img && <img src={entry.data.img} alt={entry.data.img_alt || ''} />}
-					<div class="content">
-						<Content />
+				<div class="content-layout">
+					{headings.length > 0 && (
+						<div class="sidebar">
+							<TableOfContents headings={headings} />
+						</div>
+					)}
+					<div class="main-content">
+						<div class="stack gap-10 content">
+							{entry.data.img && <img src={entry.data.img} alt={entry.data.img_alt || ''} />}
+							<div class="content">
+								<Content />
+							</div>
+						</div>
 					</div>
 				</div>
 			</main>
@@ -85,6 +108,23 @@ const { Content } = await entry.render();
 		max-width: 54ch;
 	}
 
+	.content-layout {
+		display: flex;
+		gap: 2rem;
+		align-items: flex-start;
+	}
+
+	.sidebar {
+		position: sticky;
+		top: 2rem;
+		flex-shrink: 0;
+	}
+
+	.main-content {
+		flex: 1;
+		min-width: 0;
+	}
+
 	.content {
 		max-width: 65ch;
 		margin-inline: auto;
@@ -100,6 +140,7 @@ const { Content } = await entry.render();
 	.content :global(h4),
 	.content :global(h5) {
 		margin: 1.5rem 0;
+		scroll-margin-top: 2rem;
 	}
 
 	.content :global(img) {
@@ -131,6 +172,18 @@ const { Content } = await entry.render();
 	.content :global(a:hover),
 	.content :global(a:focus) {
 		text-decoration-color: currentColor;
+	}
+
+	/* Mobile: stack vertically */
+	@media (max-width: 768px) {
+		.content-layout {
+			flex-direction: column;
+			gap: 1rem;
+		}
+
+		.sidebar {
+			position: static;
+		}
 	}
 
 	@media (min-width: 50em) {
