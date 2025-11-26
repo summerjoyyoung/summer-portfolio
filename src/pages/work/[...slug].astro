@@ -42,51 +42,55 @@ const headings: Heading[] = rawHeadings
 ---
 
 <BaseLayout title={entry.data.title} description={entry.data.description}>
-	<div class="stack gap-20">
-		<div class="stack gap-15">
-			<header>
-				<div class="wrapper stack gap-2">
-					<a class="back-link" href="/work/"><Icon icon="arrow-left" /> Work</a>
-					<Hero title={entry.data.title} align="start">
-						<div class="details">
-							<div class="tags">
-								{entry.data.tags.map((t) => <Pill>{t}</Pill>)}
-							</div>
-							<p class="description">{entry.data.description}</p>
-						</div>
-					</Hero>
+	<header class="page-header">
+		<div class="wrapper">
+			<a class="back-link" href="/work/"><Icon icon="arrow-left" /> Work</a>
+			<Hero title={entry.data.title} align="start">
+				<div class="details">
+					<div class="tags">
+						{entry.data.tags.map((t) => <Pill>{t}</Pill>)}
+					</div>
+					<p class="description">{entry.data.description}</p>
 				</div>
-			</header>
-			<main class="wrapper">
-				<div class="content-layout">
-					{headings.length > 0 && (
-						<div class="sidebar">
-							<TableOfContents headings={headings} />
-						</div>
-					)}
-					<div class="main-content">
-						<div class="stack gap-10 content">
-							{entry.data.img && <img src={entry.data.img} alt={entry.data.img_alt || ''} />}
-							<div class="content">
-								<Content />
-							</div>
-						</div>
+			</Hero>
+		</div>
+	</header>
+
+	<main class="page-main">
+		<div class="wrapper">
+			<div class="content-layout">
+				{headings.length > 0 && (
+					<div class="sidebar">
+						<TableOfContents headings={headings} />
+					</div>
+				)}
+				<div class="main-content">
+					{entry.data.img && <img src={entry.data.img} alt={entry.data.img_alt || ''} class="hero-image" />}
+					<div class="content">
+						<Content />
 					</div>
 				</div>
-			</main>
+			</div>
 		</div>
-		<ContactCTA />
-	</div>
+	</main>
+
+	<ContactCTA />
 </BaseLayout>
 
 <style>
-	header {
+	.page-header {
 		padding-bottom: 2.5rem;
 		border-bottom: 1px solid var(--gray-800);
+		margin-bottom: 3.75rem;
+	}
+
+	.page-main {
+		margin-bottom: 5rem;
 	}
 
 	.back-link {
 		display: none;
+		margin-bottom: 0.5rem;
 	}
 
 	.details {
@@ -123,6 +127,15 @@ const headings: Heading[] = rawHeadings
 	.main-content {
 		flex: 1;
 		min-width: 0;
+	}
+
+	.hero-image {
+		width: 100%;
+		margin-bottom: 2.5rem;
+		border-radius: 1.5rem;
+		box-shadow: var(--shadow-sm);
+		background: var(--gradient-subtle);
+		border: 1px solid var(--gray-800);
 	}
 
 	.content {
@@ -189,7 +202,6 @@ const headings: Heading[] = rawHeadings
 	@media (min-width: 50em) {
 		.back-link {
 			display: block;
-			align-self: flex-start;
 		}
 
 		.details {
