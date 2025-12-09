@@ -16,9 +16,9 @@
     "spellcheck:fix": "cspell \"**/*.{md,mdx,astro,ts,js,json}\" --no-must-find-files"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.5",
-    "@astrojs/mdx": "^4.3.11",
-    "astro": "^5.15.9",
+    "@astrojs/check": "^0.9.6",
+    "@astrojs/mdx": "^4.3.12",
+    "astro": "^5.16.4",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
