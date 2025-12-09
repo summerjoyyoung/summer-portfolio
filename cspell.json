@@ -1,0 +1,42 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": ["astro", "summeryoung", "pluto", "MDX", "prettier", "eslint"],
+  "ignoreWords": [],
+  "dictionaryDefinitions": [
+    {
+      "name": "project-words",
+      "path": "./cspell-dict.txt",
+      "addWords": true
+    }
+  ],
+  "dictionaries": [
+    "typescript",
+    "node",
+    "npm",
+    "html",
+    "css",
+    "bash",
+    "project-words"
+  ],
+  "ignorePaths": [
+    "node_modules/**",
+    "dist/**",
+    ".astro/**",
+    "package-lock.json",
+    "*.min.js",
+    "*.min.css"
+  ],
+  "enabledLanguageIds": [
+    "markdown",
+    "mdx",
+    "astro",
+    "javascript",
+    "typescript",
+    "json",
+    "jsonc",
+    "plaintext"
+  ],
+  "flagWords": [],
+  "useGitignore": true
+}

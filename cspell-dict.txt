@@ -1,0 +1,20 @@
+# Custom dictionary for project-specific words
+# Add words here that should be recognized by the spell checker
+# One word per line
+
+VPDS
+Dribbble
+Behance
+codepen
+dribbble
+behance
+Venmo
+wireframes
+Wireframes
+collab
+Deque
+Quizlet
+Chegg
+Premade
+Tremaine
+
