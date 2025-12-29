@@ -1,7 +1,7 @@
 # Summer's Portfolio
 
 ## To Do
-- [ ] Add a table of contents to work pages
+- [x] Add a table of contents to work pages
 - [ ] Add slideshow component for images on work pages
 - [ ] Add a VPDS work page
 
