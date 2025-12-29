@@ -10,6 +10,8 @@ tags:
   - Case Study
 ---
 
+import ImageSlideshow from '../../components/ImageSlideshow';
+
 ## The Problem
 
 PlutoPay users need a way to securely store their banking and credit card details in one place because they don't want to struggle keeping track of multiple cards and accounts. We will know this to be true when we see an increase in use of the app as users use it more to make their online transactions.
@@ -175,20 +177,22 @@ From these insights, we designed an application that can meet user needs and pro
 
 Based on user research, I defined user personas which represent the people who will be using PlutoPay. These personas allow myself and stakeholders to build invaluable empathy towards our user base and ensure that we are designing for users and not ourselves.
 
-<img
-  src="/assets/pluto-pay/persona-lacy.jpeg"
-  alt="User personas for PlutoPay"
-  style="width: 100%; margin-top: 16px;"
-/>
-<img
-  src="/assets/pluto-pay/persona-jazz.jpeg"
-  alt="User personas for PlutoPay"
-  style="width: 100%; margin-top: 16px;"
-/>
-<img
-  src="/assets/pluto-pay/persona-sam.jpeg"
-  alt="User personas for PlutoPay"
-  style="width: 100%; margin-top: 16px;"
+<ImageSlideshow
+  client:load
+  images={[
+    {
+      src: '/assets/pluto-pay/persona-lacy.jpeg',
+      alt: 'User personas for PlutoPay',
+    },
+    {
+      src: '/assets/pluto-pay/persona-jazz.jpeg',
+      alt: 'User personas for PlutoPay',
+    },
+    {
+      src: '/assets/pluto-pay/persona-sam.jpeg',
+      alt: 'User personas for PlutoPay',
+    },
+  ]}
 />
 
 #### Journey Mapping
