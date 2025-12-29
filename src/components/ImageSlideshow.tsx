@@ -53,6 +53,7 @@ export default function ImageSlideshow({ images }: ImageSlideshowProps) {
       naturalSlideWidth={100}
       naturalSlideHeight={60}
       totalSlides={totalSlides}
+      isIntrinsicHeight={true}
     >
       <ButtonBack>←</ButtonBack>
       <ButtonNext>→</ButtonNext>
@@ -61,7 +62,16 @@ export default function ImageSlideshow({ images }: ImageSlideshowProps) {
       <Slider>
         {images.map((image, index) => (
           <Slide index={index} key={index}>
-            <img src={image.src} alt={image.alt} />
+            <img
+              src={image.src}
+              alt={image.alt}
+              style={{
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+                maxWidth: '100%',
+              }}
+            />
           </Slide>
         ))}
       </Slider>
