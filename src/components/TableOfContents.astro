@@ -16,13 +16,19 @@ const { headings } = Astro.props;
   <h2 class="toc-title">Contents</h2>
   <nav>
     <ol class="toc-list">
-      {headings.map((heading) => (
-        <li class={`toc-item toc-item--h${heading.level}`}>
-          <a href={`#${heading.id}`} class="toc-link" data-heading-id={heading.id}>
-            {heading.text}
-          </a>
-        </li>
-      ))}
+      {
+        headings.map((heading) => (
+          <li class={`toc-item toc-item--h${heading.level}`}>
+            <a
+              href={`#${heading.id}`}
+              class="toc-link"
+              data-heading-id={heading.id}
+            >
+              {heading.text}
+            </a>
+          </li>
+        ))
+      }
     </ol>
   </nav>
 </aside>
@@ -105,18 +111,22 @@ const { headings } = Astro.props;
 <script>
   function initTableOfContents() {
     const tocLinks = document.querySelectorAll('.toc-link');
-    
+
     // Smooth scrolling for TOC links
-    tocLinks.forEach(link => {
+    tocLinks.forEach((link) => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
         const targetId = link.getAttribute('href')?.substring(1);
         const targetElement = document.getElementById(targetId || '');
-        
+
+        // Immediately update active state for clicked link
+        tocLinks.forEach((l) => l.classList.remove('active'));
+        link.classList.add('active');
+
         if (targetElement) {
           targetElement.scrollIntoView({
             behavior: 'smooth',
-            block: 'start'
+            block: 'start',
           });
         }
       });
@@ -126,13 +136,13 @@ const { headings } = Astro.props;
     const headings = document.querySelectorAll('h2[id], h3[id]');
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           const id = entry.target.id;
           const tocLink = document.querySelector(`[data-heading-id="${id}"]`);
-          
+
           if (entry.isIntersecting && tocLink) {
             // Remove active from all links
-            tocLinks.forEach(link => link.classList.remove('active'));
+            tocLinks.forEach((link) => link.classList.remove('active'));
             // Add active to current link
             tocLink.classList.add('active');
           }
@@ -141,7 +151,7 @@ const { headings } = Astro.props;
       { rootMargin: '-20% 0px -70% 0px' }
     );
 
-    headings.forEach(heading => observer.observe(heading));
+    headings.forEach((heading) => observer.observe(heading));
   }
 
   // Initialize on page load
