@@ -8,7 +8,7 @@ import {
   CarouselContext,
 } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
-
+import { iconPaths } from './IconPaths';
 interface ImageData {
   src: string;
   alt: string;
@@ -55,8 +55,30 @@ export default function ImageSlideshow({ images }: ImageSlideshowProps) {
       totalSlides={totalSlides}
       isIntrinsicHeight={true}
     >
-      <ButtonBack>←</ButtonBack>
-      <ButtonNext>→</ButtonNext>
+      <ButtonBack>
+        <svg
+          width="40"
+          height="40"
+          viewBox="0 0 256 256"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          stroke="black"
+        >
+          <g dangerouslySetInnerHTML={{ __html: iconPaths['arrow-left'] }} />
+        </svg>
+      </ButtonBack>
+      <ButtonNext>
+        <svg
+          width="40"
+          height="40"
+          viewBox="0 0 256 256"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          stroke="black"
+        >
+          <g dangerouslySetInnerHTML={{ __html: iconPaths['arrow-right'] }} />
+        </svg>
+      </ButtonNext>
       <SlideIndicator totalSlides={totalSlides} />
 
       <Slider>
