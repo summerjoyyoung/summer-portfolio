@@ -1,0 +1,88 @@
+---
+title: VPDS Public Launch
+publishDate: 2024-08-01 00:00:00
+img: /assets/vpds-launch/vpds-launch.png
+img_alt: Screenshot of design.visa.com, Visa's publicly launched Product Design System, showing the component documentation homepage.
+description: |
+  I was a key engineer in transforming Visa's internal design system into a public-facing platform — closing 100% of security findings, redesigning navigation, building deployment infrastructure, and delivering core features for launch.
+tags:
+  - Engineering
+  - Design Systems
+  - Design
+---
+
+Visa's Product Design System existed as an internal resource used across the organization. The goal was to make it publicly accessible at design.visa.com. But "making it public" was far more than flipping a switch.
+
+The site needed to meet enterprise security standards for public exposure. The information architecture needed to work for external audiences who hadn't grown up with Visa's internal conventions. And the deployment infrastructure — built on undocumented legacy systems — needed to be reliable and self-serviceable by the team, not a black box that required tribal knowledge to operate.
+
+I was one of a small number of engineers with high ownership across the launch. I drove multiple critical workstreams simultaneously.
+
+**My role:** High-ownership engineer across security hardening, navigation redesign, infrastructure automation, and feature delivery.
+**Tools:** TypeScript, Astro, Node.js, bash scripting
+
+---
+
+## Security Hardening
+
+Before a Visa web property can go public, it goes through a formal security review. The review surfaced 10 findings. I closed all 10.
+
+The work ranged across common web security vectors: content security policy configuration, header hygiene, input handling, and third-party dependency risks. Each finding required understanding the specific vulnerability — what attack it enabled, how Visa's reviewers wanted it addressed — and implementing the fix without breaking the features already in development.
+
+The site launched with enterprise-grade compliance from day one. Zero security incidents after launch.
+
+---
+
+## Navigation Redesign
+
+The internal site's navigation was built for people who already knew the system. For external developers encountering VPDS for the first time, the structure didn't communicate the hierarchy clearly enough to be useful.
+
+I worked on an improved left navigation system that made the design system's content structure clear and navigable for new users. The redesign addressed two problems: the top-level sections needed to reflect how external developers think about design system documentation (not how internal teams organized it), and the active state and wayfinding cues needed to be strong enough that users always knew where they were.
+
+---
+
+## Infrastructure and Deployment
+
+The team's development velocity was quietly being throttled by undocumented legacy infrastructure. Deployments required knowledge that lived in people's heads, not in runbooks, and the process was opaque enough that engineers outside the core team couldn't self-sufficiently manage releases.
+
+Rather than working around this, I treated it as a technical debt problem worth solving before launch. I:
+
+- **Audited the existing deployment pipeline** to understand what was actually happening and where the undocumented steps were
+- **Authored automation scripts** that handled the deployment steps that had been done manually
+- **Wrote operational runbooks** that documented the full process — what each script does, what to do when it fails, who to contact for what
+
+The result: the team could self-sufficiently manage deployments without dependencies on individuals who happened to know how things worked. Engineering capacity that had been absorbed by infrastructure overhead shifted back to the design system itself.
+
+---
+
+## Feature Delivery
+
+Beyond infrastructure, I delivered several of the core front-end features that shipped with the launch:
+
+**Code Switcher** — multi-framework, multi-version code examples with hybrid URL/localStorage persistence and robust edge case handling. Documented separately in my portfolio.
+
+**Example List Page** — a browsable inventory of all component examples across the system, making it easy to discover what's available without navigating component by component.
+
+**Improved Left Navigation** — the redesigned navigation system described above, implemented with accessible keyboard and screen reader support.
+
+**Codebox Component** — the interactive code preview component used throughout documentation, enabling live examples alongside static code blocks.
+
+---
+
+## Impact
+
+design.visa.com launched publicly with 100% uptime and zero security incidents. It immediately became a resource for Visa's broader developer and design community.
+
+- **14,000+ active users** across the organization
+- **139,000+ page views** since launch
+- **23,560+ library downloads** across multiple supported frameworks
+- **100% of security findings closed** prior to launch
+
+---
+
+## Reflections
+
+**Scope is a decision, not a default.** Early in the launch timeline, it would have been easy to stay focused on my assigned feature work and treat security and infrastructure as someone else's problem. They weren't clearly in my lane. But they needed to happen for the launch to succeed, and I had the capacity and the context to do them well. Choosing to take them on was the right call — and it's a pattern I'd repeat.
+
+**Undocumented infrastructure is technical debt with compound interest.** Every month the deployment process stayed undocumented, it cost the team time and introduced risk. Fixing it before launch rather than after meant the team could operate at full capacity from day one instead of learning under pressure.
+
+**A public launch is a system problem, not a features problem.** The things that could have caused the launch to fail weren't missing features — they were security vulnerabilities, infrastructure fragility, and navigation that confused new users. Understanding that let me prioritize correctly. Getting the features right matters; making sure the platform they run on is sound is what makes the features count.

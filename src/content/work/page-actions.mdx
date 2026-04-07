@@ -1,0 +1,71 @@
+---
+title: Page Actions
+publishDate: 2024-11-01 00:00:00
+img: /assets/page-actions/page-actions.png
+img_alt: Screenshot of Visa's Product Design System documentation page showing the page-level copy and view actions in context.
+description: |
+  I designed and built page-level actions for Visa's public design system that let users copy documentation as markdown or view it in a new tab — making it effortless to bring design system content into LLM-powered workflows.
+tags:
+  - Design
+  - Engineering
+  - Design Systems
+---
+
+Visa's Product Design System (VPDS) had just gone public when the team started noticing a shift in how developers were actually using documentation. People weren't just reading component pages — they were copying them into ChatGPT and Claude to help write implementation code. But there was no clean way to do that. Users were manually selecting, copying, and reformatting page content, losing structure and fidelity along the way.
+
+I designed and built a set of page-level actions to close that gap. The goal was simple: let developers bring design system documentation into their LLM workflow with one click, without losing the structure that makes the content useful.
+
+**My role:** Design and build, end-to-end — from participating in the team discussions that surfaced the need, through UX exploration in Figma, to the final front-end implementation.
+**Tools:** Figma, TypeScript, Astro
+
+---
+
+## The Problem
+
+VPDS launched publicly serving 14,000+ active users across Visa. As LLM-assisted development became the norm, developers were increasingly pulling documentation into tools like ChatGPT and Claude to help with component implementation — but the workflow was painful. Manual select-all captured the wrong content, lost structural fidelity, and gave the model a garbled mess to work from.
+
+The team's goal was to make VPDS documentation AI-ready. No competitor enterprise design system had done this yet. The question was how to do it in a way that was fast, discoverable, and actually produced clean output.
+
+---
+
+## Design Decisions
+
+### Placement and visibility
+
+The actions needed to be discoverable without adding noise to an already content-dense documentation page. I explored several placements — fixed in the global header, pinned to the page content area, floating in the corner — and landed on a location that kept the actions visible in context without competing with the primary content hierarchy.
+
+The audience informed this decision throughout. Developers familiar with design system docs have a high tolerance for utility-focused interfaces. I kept labeling concise and assumed familiarity with concepts like markdown rather than over-explaining.
+
+### Interaction model
+
+I designed two complementary actions:
+
+**Copy as markdown** copies the current page's content to the clipboard in one click — the fastest path from docs to LLM prompt. **View markdown** opens the raw markdown in a new tab, letting users preview and selectively copy sections before pasting.
+
+Each action includes confirmation feedback so users know it worked. The copy action shows a toast; the view action opens the new tab immediately, which is its own confirmation.
+
+### Markdown conversion quality
+
+This was the hardest part. Design system documentation pages are structurally complex — they include code blocks across multiple frameworks (React, Angular, Vue), data tables, nested lists, image references, and custom components like live code previews.
+
+Getting the markdown output to be clean and actually useful when pasted into an LLM required careful handling of each content type. Code blocks needed language tags preserved. Tables needed to render as markdown tables, not visual noise. Custom components that don't translate to markdown needed to be omitted gracefully rather than output as broken HTML strings.
+
+The bar I held myself to: a developer should be able to paste the output directly into a prompt and get useful results back. Not a lossy copy that would confuse the model — documentation-quality markdown.
+
+---
+
+## Impact
+
+Recently shipped — quantitative adoption data is still being collected. The feature directly supports the team's goal of making VPDS documentation AI-ready, positioning Visa's design system ahead of most enterprise design systems that haven't yet adapted for LLM workflows.
+
+The feature works on every public documentation page, covering the full component library across all supported frameworks.
+
+---
+
+## Reflections
+
+**Markdown quality is a UX problem.** Most of the design work here wasn't visual — it was deciding how to represent each content type in a way that would be useful after leaving the page. A clean component table in markdown versus a broken HTML fragment is the difference between a prompt that works and one that produces hallucinated API shapes.
+
+**The audience changes the design.** Knowing I was designing for developers, not general users, let me make decisions I wouldn't make for a broader audience: terse labels, no instructional copy, confirmation feedback that gets out of the way quickly. Matching the vocabulary and mental models of the people using the feature is part of the design.
+
+**Building bridges between tools is valuable work.** This wasn't a new component or a redesigned page — it was making existing content work better in a context the original authors hadn't anticipated. That kind of forward-looking infrastructure work is often undervalued, but it compounds. Every documentation update automatically becomes better LLM input without anyone doing extra work.

@@ -2,9 +2,9 @@
 title: PlutoPay
 publishDate: 2020-03-02 00:00:00
 img: /assets/pluto-pay/pluto-pay.jpeg
-img_alt: A digitally manipulated image of a hand emerging from a torn hole in a solid blue background, holding a smartphone. The phone screen displays a payment confirmation message, and a small receipt is printing out from the device. Golden coins are floating around the phone, symbolizing digital transactions or mobile payments.
+img_alt: A digitally manipulated image of a hand emerging from a torn hole in a solid blue background, holding a smartphone displaying a payment confirmation message with a small receipt printing from the device and golden coins floating around it, symbolizing digital mobile payments.
 description: |
-  Case study for a responsive web-app that allows anyone to shop, transfer money, and more without a debit or credit card or the need to visit a physical bank or store.
+  A UX case study for a responsive payment app that lets users securely manage multiple cards, make transactions, and set spending budgets — without needing a physical bank or store.
 tags:
   - Design
   - Case Study
@@ -12,489 +12,361 @@ tags:
 
 import ImageSlideshow from '../../components/ImageSlideshow';
 
+PlutoPay is a responsive web app designed to give users a secure, unified place to manage their payment methods and make transactions online — without needing to carry or juggle multiple physical cards. This was a solo end-to-end UX project, from research through high-fidelity prototype, completed as part of my CareerFoundry UX/UI Design certification.
+
+The project received strong recognition from peers and instructors, and it was also an inflection point for me personally: coming in as a front-end engineer, designing with accessibility annotations from the start was something I could bring to the project from day one — and it shaped how I think about the design-to-engineering handoff to this day.
+
+**My role:** Solo UX designer — research, IA, wireframing, prototyping, user testing, accessibility annotations, design system
+**Tools:** Figma, Deque axe plugin, Maze (user testing)
+
+---
+
 ## The Problem
 
-PlutoPay users need a way to securely store their banking and credit card details in one place because they don't want to struggle keeping track of multiple cards and accounts. We will know this to be true when we see an increase in use of the app as users use it more to make their online transactions.
+People who manage multiple payment methods online deal with a fragmented experience: different cards saved across different sites, no unified view of spending, and no easy way to set limits before hitting them. For users who are unbanked or prefer not to use traditional financial institutions, the gap is even wider.
 
-### The Solution
+The opportunity was a single, secure app that consolidates payment methods, handles transactions without exposing card details, and gives users meaningful control over their spending — before they go over budget, not after.
 
-A secure app that allows users to store their banking and card information which will handle the users payment transactions online without sharing the users information. Users will be able to decide what cards they want to user for what types of transactions as well as set budgets or limits on categories of spending allowing to get warnings at purchase of when they will be nearing or going over budget.
+---
 
 ## Research and Discovery
 
-It was crucial for me to understand the business requirements and align them to user needs. I researched perspectives from the business, potential users, and competitors to collect data and define constraints.
+Before designing anything, I needed to understand the business constraints, what competitors were already doing well (and poorly), and what real users actually needed from a payment app. These three angles shaped every major design decision.
 
 ### Business Requirements
 
-It is important that stakeholders have a clear understanding of the PlutoPay app, its intended audience, and our estimated timeline to minimum viable product. I created documentation of business requirements to ensure that all stakeholders including myself had a clear understanding of PlutoPay. I delivered this documentation to stakeholders for approval before moving forward.
+I started by defining a clear set of business requirements to align the project scope — who PlutoPay was for, what it needed to do, and what success looked like. Getting this documented first meant design decisions could be evaluated against real criteria rather than gut feel. From there I moved into competitive research to understand the landscape I was designing into.
 
-I needed more understanding of the problem space of online payment applications. To gain more understanding I completed a competitive and SWOT analysis of other applications to gain better understanding of the competition and how the gain customers, keep customers, and fall short of customer needs and expectations.
+### Competitive Analysis
 
-#### Competitive Analysis
+I analyzed PayPal and Google Pay as the two dominant players in the space.
 
-##### Paypal
+**PayPal's** core transaction flow is genuinely well-designed — two or three clicks from product page to payment confirmation, with a preselected default payment method. That simplicity was a bar PlutoPay had to match or beat. The gaps are in trust and transparency: users frequently report funds being held without clear explanation, and there's no meaningful budgeting feature to help users stay on top of spending.
 
-The main user flow of completing a transaction for online shopping the user simply has to click 2-3 buttons, the PayPal buttons, a radio button to select their payment method (this is optional because the users default payment method is already preselected) and then the complete payment button.
+**Google Pay's** checkout experience is arguably smoother for Chrome users — no re-login required if you're signed into the browser. Its spending tracker is a genuine strength. But its biggest UX problem is a split identity: Google Wallet and Google Pay have overlapping functions that confuse users about which to use and why. Poor in-app customer service and reliability issues compound the friction.
 
-<table>
-  <thead>
-    <tr>
-      <th>Strengths</th>
-      <th>Weaknesses</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        PayPal button on almost every website checkout and 2-3 click user flow
-        to complete purchase
-      </td>
-      <td>
-        Take advantage of PayPal’s lack of transparency when they withhold user
-        funds by improving this experience
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Customer trust and loyalty built from being the longest online
-        transaction business
-      </td>
-      <td>Budgeting feature</td>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <thead>
-    <tr>
-      <th>Opportunities</th>
-      <th>Threats</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        UX lacks proper explanation of why peoples funds are being held up. May
-        reviews of the app claim that PayPal will hold their funds for a long
-        time and not clearly explain why
-      </td>
-      <td>
-        Google Pay, Apple Pay, Samsung Pay support online transactions but also
-        a digital wallet on their hardware phones that allows users to pay
-        physically in store
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Lacks social-ness. Apps like Venmo emphasize a social UX which show you
-        your friends transactions
-      </td>
-      <td>
-        Cash based economies. Some economies (ex. Japan) still revolve heavily
-        around cash systems and in-person purchases.
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-##### Google Pay
-
-UX for making online purchases is as easy as PayPals, even easier if the user is using Chrome browser to shop & logged in to the browser because the user doesn’t have to login again to use google pay while users might have to login for PayPal
-
-<table>
-  <thead>
-    <tr>
-      <th>Strengths</th>
-      <th>Weaknesses</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Does a good job showing coupons & deals.</td>
-      <td>
-        Better customer service that is quick clear and easy in moments of
-        frustration
-      </td>
-    </tr>
-    <tr>
-      <td>Offers a budgeting and spending tracker feature</td>
-      <td>Increased app reliability and stability</td>
-    </tr>
-    <td>
-      Not profitable at the moment, no fees for the user, company is focusing on
-      making it a good product to attract users before making it profitable
-    </td>
-    <td>Increasing the social-ness of the app like Line or WeChat pay</td>
-    <tr></tr>
-  </tbody>
-</table>
-
-<table>
-  <thead>
-    <tr>
-      <th>Opportunities</th>
-      <th>Threats</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        Poor customer service when something in the app goes wrong according to
-        reviews from the google play store
-      </td>
-      <td>
-        Amazon Pay and Ali Pay offer digital payment which is convenient since
-        much of the population has an account with their payment info already
-        saved
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Split branding & experiences between Google Wallet & Pay causes user
-        confusion about function of both app
-      </td>
-      <td>
-        Line pay, WeChat pay and Venmo are all more social media focused payment
-        apps which are popular around the world
-      </td>
-    </tr>
-  </tbody>
-</table>
+What this told me: PlutoPay needed to match the simplicity of PayPal's transaction flow, be transparent where competitors are opaque, and add the budgeting controls that neither competitor does well.
 
 ### User Research
 
-User interviews were conducted to achieve these user research goals. I wanted to better understand how users use e-wallets and the tasks they perform with them. I also wanted to determine which apps my users use and what users enjoy or dislike about those e-wallet apps.
+With competitive context in hand, I ran user interviews to validate assumptions and surface needs I hadn't anticipated. My goals: understand how people currently manage their payment methods, what they like and dislike about existing apps, and where they run into friction.
 
 #### Affinity Mapping
 
-The user interviews produced a ton of data, but it had to be thoroughly organized and analyzed to yield any real insights. This is where affinity mapping came in, from my affinity map I determined key insights which, in summary, suggest that users want an application that is convenient to use, that does not collect or sell user data, and keeps their information private.
+The interviews generated a lot of data across six themes: convenience, privacy & security, dislikes, data harvesting concerns, budgeting behaviors, and use cases. Affinity mapping let me pull recurring patterns out of the noise and identify what actually mattered most to users.
 
-From these insights, we designed an application that can meet user needs and provide users value.
+The quotes that surfaced most clearly: _"PayPal helps me ensure security and privacy for purchases on new sites I'm not familiar with, and helps with first time entry"_ — and on the other end of trust, _"E-wallets are probably skimming my data. I'm almost sure of that for Google at least."_ Privacy wasn't just a preference; for many users it was a precondition for using the app at all.
+
+The core insight: users want convenience and consolidation, but only if they trust that their data won't be shared or exposed without their knowledge. That shaped PlutoPay's core value proposition.
 
 <ImageSlideshow
   client:load
   images={[
     {
       src: '/assets/pluto-pay/affinity-map.jpeg',
-      alt: 'affinity map of PlutoPay',
+      alt: 'Affinity map showing clustered user interview sticky notes organized into six themes: Convenience, Privacy & Security, Dislikes, Data Harvest, Budgeting, and Use Cases — with direct user quotes in each column',
     },
     {
       src: '/assets/pluto-pay/affinity-map-contd.jpeg',
-      alt: 'affinity map of PlutoPay',
+      alt: 'Continuation of the affinity map with additional insight clusters including more use case patterns and budgeting behaviors drawn from user interviews',
     },
   ]}
 />
 
 #### User Personas
 
-Based on user research, I defined user personas which represent the people who will be using PlutoPay. These personas allow myself and stakeholders to build invaluable empathy towards our user base and ensure that we are designing for users and not ourselves.
+From the research themes, I defined three personas representing distinct relationships with digital payments. These weren't just demographic profiles — they captured different mental models, frustrations, and goals that I returned to when evaluating design decisions.
 
-<ImageSlideshow
-  client:load
-  images={[
-    {
-      src: '/assets/pluto-pay/persona-lacy.jpeg',
-      alt: 'User personas for PlutoPay',
-    },
-    {
-      src: '/assets/pluto-pay/persona-jazz.jpeg',
-      alt: 'User personas for PlutoPay',
-    },
-    {
-      src: '/assets/pluto-pay/persona-sam.jpeg',
-      alt: 'User personas for PlutoPay',
-    },
-  ]}
-/>
+**Lacy, 20 — Interior Designer, New York, NY** is always on the go, constantly buying items for clients and splitting bills with roommates. She needs payment to be fast and private, hates troubleshooting app issues when she has no time, and uses Venmo frequently — frustrated that it doesn't have autopay. Her core need: _"I'm constantly buying items for clients so I need checkout to be fast."_
+
+**Jazz, 27 — Etsy Shop Owner, Denver, CO** runs a small business selling art and needs to track business transactions separately from personal spending. She's frustrated by hidden fees, time-consuming customer service, and business bookkeeping overhead. Privacy matters: she uses Venmo specifically because it gives her privacy when selling in person. Her core need: _"Venmo gives me privacy when I'm selling my art in person to customers."_
+
+**Sam, 24 — Social Media Manager, Seattle, WA** is impulsive about shopping and forgetful about bills — their ADHD makes budgeting stressful rather than empowering. They want convenience above all, need bill pay reminders or autopay, and are constantly losing their wallet. E-wallets are a genuine relief for them: _"I'm glad e-wallets exist because of how convenient they are."_
+
+Together these three personas covered the primary needs PlutoPay had to address: speed and privacy (Lacy), business transaction tracking (Jazz), and budget-aware spending with reminders (Sam).
 
 #### Journey Mapping
 
-I needed to understand the processes users go through to make purchases and build empathy with the user and their current experience. This is where journey mapping came in, I created user journey maps using our personas and drew from my user research to generate scenarios, phases, thoughts and opportunities for each persona.Based off of the journey map I was able to develop opportunities we could take to solve user problems.
+I mapped the current-state experience of each persona making an online purchase — capturing their actions, thoughts, and emotional highs and lows at each phase. The journey maps surfaced two consistent pain points: the anxiety of entering card details on unfamiliar sites, and the frustration of realizing they'd gone over budget after the fact. These two moments became primary design targets.
+
+**Lacy's journey** centered on ordering food on the go. The emotional low hit early — restaurant sites aren't mobile-friendly and take forever to navigate — then recovered at checkout when PlutoPay handled the payment cleanly, before dipping again at pickup. Opportunities: make the experience mobile-first, offer express checkout, enable bill splitting.
+
+**Jazz's journey** was about doing taxes and needing a clean transaction list. She started frustrated, relieved once she found the filter, but ended wanting PlutoPay to calculate totals for her so she wouldn't need Excel at all. Opportunities: streamlined transaction navigation, CSV export, and income total calculations.
+
+**Sam's journey** was a simple peer payment — paying back a friend for a vacation. Emotionally low at the start (embarrassed about forgetting), but the actual payment flow was smooth enough that Sam finished satisfied. Opportunities: payment request flows, tip/tax calculators, payment method switching, and clearer in-progress communication.
 
 <ImageSlideshow
   client:only="react"
   images={[
     {
       src: '/assets/pluto-pay/journey-lacy.jpeg',
-      alt: 'User journeys for PlutoPay',
+      alt: 'Journey map for Lacy showing three phases — Pick a Restaurant, Checkout, Picks Up Food — with actions, thoughts, and an emotional arc that dips during mobile ordering friction, recovers at checkout, then dips again at pickup. Opportunities identified: mobile-friendly experience, express checkout, bill splitting.',
     },
     {
       src: '/assets/pluto-pay/journey-jazz.jpeg',
-      alt: 'User journeys for PlutoPay',
+      alt: 'Journey map for Jazz showing three phases — Navigate to Transactions, Filter Transactions, Download CSV File — with an emotional arc that starts frustrated and improves as she finds the tools she needs, but ends wanting automatic totals. Opportunities: easy transaction access, simple download flow, income total calculations.',
     },
     {
       src: '/assets/pluto-pay/journey-sam.jpeg',
-      alt: 'User journeys for PlutoPay',
+      alt: 'Journey map for Sam showing three phases — Message Friend, Set Up Payment, Payback Friend — with an emotional arc that starts low (embarrassed about forgetting) and ends high after a smooth payment flow. Opportunities: payment request feature, tip/tax calculator, payment method switching, clear status communication.',
     },
   ]}
 />
 
-### Ideation and Conceptualization
+---
 
-Empowered with data and insights, I moved on to the ideation phase to map out what screens would be needed for users to complete their basic tasks. I then started to create low fidelity wireframes and iterate my ideas into higher fidelity prototypes.
+## Ideation and Design
 
-#### User Flows
+Empowered with research, I moved into designing the actual experience — starting broad with what screens were needed and progressively narrowing toward a testable prototype.
 
-Given the basic tasks that users would perform within the app I wanted to visualize the various decisions and actions the users would need to take to finish their task. This is where the creation of user flows helped. For each task I created a user flow diagram and this gave me an initial idea of what screens I would need.
+### User Flows
+
+Before sketching screens, I mapped the key user flows: onboarding, sending money, and searching for a payee. This let me identify every decision point a user would encounter and estimate screen count before committing to visual design. It also revealed a few redundant steps I cut before they made it into wireframes.
 
 <ImageSlideshow
   client:only="react"
   images={[
     {
       src: '/assets/pluto-pay/flow-onboarding.jpeg',
-      alt: 'User journeys for PlutoPay',
+      alt: 'User flow diagram for onboarding showing the decision tree from first launch through account creation, verification, and first payment method added',
     },
     {
       src: '/assets/pluto-pay/flow-search.jpeg',
-      alt: 'User journeys for PlutoPay',
+      alt: 'User flow diagram for searching and selecting a payee, including empty state and error handling branches',
     },
     {
       src: '/assets/pluto-pay/flow-send-money.jpeg',
-      alt: 'User journeys for PlutoPay',
+      alt: 'User flow diagram for sending money, covering payment method selection, amount entry, confirmation, and success state',
     },
   ]}
 />
 
-#### Site Mapping
+### Site Map
 
-I then used my list of screens and created a site map. I went through several iterations of site mapping and settled on this one pictured. This map provided a clear outline of the architecture of the PlutoPay app.
+With the flows defined, I created a site map to establish the full information architecture. I went through several iterations — early versions had too many top-level sections, which would have made navigation feel heavy for a task-focused app. I consolidated until the architecture reflected what users actually need to do, not everything the app could theoretically offer.
 
 <img
   src="/assets/pluto-pay/site-map.jpeg"
-  alt="User journeys for PlutoPay"
+  alt="Site map for PlutoPay showing the full app architecture with primary navigation sections for Home, Pay/Request, Transactions, and Profile, and their sub-pages"
   style="width: 100%; margin-top: 16px;"
 />
 
-### Wire-Framing Low to High
+---
 
-Based on the site map I created, I started with drawing out mobile wireframes of the application screens. I iterated many times to get a sense of where things should be located on the screens.
+## Wireframing: Low to High
 
-#### Low Fidelity Wireframes
+### Low Fidelity
 
-Now that I had user flows and a site map, I had a foundation to understand the required screens for my project. My main objective was to determine the visual elements such as buttons, images, messaging, and inputs that users would need to accomplish their tasks on each page. Additionally, I wanted to determine the optimal placement of these UI elements on the page. Throughout the process of creating low-fidelity wireframes, I drew inspiration from my competitive analysis to avoid repeating the same mistakes made by other apps in the market.
+I started with hand-drawn wireframes to work out the basic layout of each screen without getting attached to visual details. My focus: what elements does a user need on each screen to complete their task, and in what order? I drew from the competitive analysis throughout — if PayPal placed a control in a confusing location, I wanted to understand why before copying or avoiding it.
 
 <ImageSlideshow
   client:only="react"
   images={[
     {
       src: '/assets/pluto-pay/low-fid-onboarding.jpeg',
-      alt: 'User journeys for PlutoPay',
+      alt: 'Low fidelity hand-drawn wireframes showing the onboarding screens with rough layout of form fields and primary navigation',
     },
     {
       src: '/assets/pluto-pay/low-fid-pay.jpeg',
-      alt: 'User journeys for PlutoPay',
+      alt: 'Low fidelity wireframes for the payment flow showing placeholder layouts for amount entry, payee selection, and confirmation',
     },
     {
       src: '/assets/pluto-pay/low-fid-search.jpeg',
-      alt: 'User journeys for PlutoPay',
+      alt: 'Low fidelity wireframes for the search experience showing input field placement and result list layout',
     },
   ]}
 />
 
-#### Mid Fidelity Wireframes
+### Mid Fidelity
 
-Once I had finalized my low-fidelity screens, I needed to determine the necessary text and information for users to complete their tasks on each page. To achieve this, I created mid-fidelity wireframes. These wireframes focused on improving the UI to have a more digital appearance and less hand-drawn, as well as identifying the text for buttons and the input fields users would be filling out. I also started selecting icons.
+Moving to mid-fidelity, I shifted focus to content: what text does each button carry, what do input labels say, what does the empty state look like? This is also where I built the first prototype and ran user testing.
 
-Once I had the screens at a stage where I believed users could interact with them, I proceeded to build a prototype. This prototype would be used in user tests to gather feedback on the early experience of each flow. By doing this, I could identify and address any errors, pitfalls, or poor experiences early in the process, before moving on to higher-fidelity screens and prototypes.
+One early idea I was attached to: a **pay/request slider** that let users toggle between modes on a single screen. It felt elegant — one control instead of two buttons. I A/B tested it against a two-button layout. The results were decisive: **79% of users preferred the buttons**, and 50% of testers showed outright confusion with the slider. Users wanted clarity over cleverness. I replaced it with two clearly labeled Pay and Request buttons — less interesting, significantly more usable.
 
 <ImageSlideshow
   client:only="react"
   images={[
     {
       src: '/assets/pluto-pay/mid-fid-onboarding.jpeg',
-      alt: 'User journeys for PlutoPay',
+      alt: 'Mid fidelity wireframes for onboarding with defined copy, input labels, and button text for each step of account creation',
     },
     {
       src: '/assets/pluto-pay/mid-fid-pay.jpeg',
-      alt: 'User journeys for PlutoPay',
+      alt: 'Mid fidelity wireframes for the payment flow, including the original slider concept that was replaced after A/B testing revealed 79% of users preferred labeled Pay and Request buttons',
     },
     {
       src: '/assets/pluto-pay/mid-fid-add-payment.jpeg',
-      alt: 'User journeys for PlutoPay',
+      alt: 'Mid fidelity wireframes for adding a payment method, showing card input fields and confirmation state',
     },
   ]}
 />
 
-#### High Fidelity Wireframes
+### High Fidelity
 
-After testing my mid-fidelity screens, I started transitioning them to higher-fidelity screens. I created a design language and emphasized the inclusion of color, images, and icons in the screens. Additionally, I paid attention to finer details such as the appearance and behavior of inputs when selected or filled out incorrectly by the user.
+With mid-fidelity testing complete, I moved into high-fidelity screens — establishing a design language including color, typography, imagery, and detailed input states. I paid particular attention to error states: for a payment app, an unclear error message at the wrong moment is a trust problem, not just a usability problem.
 
 <ImageSlideshow
   client:only="react"
   images={[
     {
       src: '/assets/pluto-pay/high-fid/Start.png',
-      alt: 'High fidelity wireframe - Start screen',
+      alt: 'High fidelity start screen with PlutoPay branding, tagline, and sign in / create account CTAs',
     },
     {
       src: '/assets/pluto-pay/high-fid/Sign-up - Empty.png',
-      alt: 'High fidelity wireframe - Sign up empty screen',
+      alt: 'High fidelity sign-up screen with empty form fields for name, email, and password',
     },
     {
       src: '/assets/pluto-pay/high-fid/Sign-up complete.png',
-      alt: 'High fidelity wireframe - Sign up complete screen',
+      alt: 'High fidelity sign-up screen with all fields filled in and validation indicators active',
     },
     {
       src: '/assets/pluto-pay/high-fid/Account Recovery - Empty.png',
-      alt: 'High fidelity wireframe - Account recovery empty screen',
+      alt: 'High fidelity account recovery screen showing email input field for password reset flow',
     },
     {
       src: '/assets/pluto-pay/high-fid/Dashboard - Filled.png',
-      alt: 'High fidelity wireframe - Dashboard filled screen',
+      alt: 'High fidelity dashboard showing account balance, recent transactions, and quick-action buttons for Pay and Request',
     },
     {
       src: '/assets/pluto-pay/high-fid/Pay Form.png',
-      alt: 'High fidelity wireframe - Pay form screen',
+      alt: 'High fidelity payment form screen with payee search field, amount entry, and payment method selector',
     },
     {
       src: '/assets/pluto-pay/high-fid/Pay Form - Search.png',
-      alt: 'High fidelity wireframe - Pay form search screen',
+      alt: 'High fidelity payment form with search results dropdown open showing matching payee contacts',
     },
     {
       src: '/assets/pluto-pay/high-fid/Pick Payment.png',
-      alt: 'High fidelity wireframe - Pick payment screen',
+      alt: 'High fidelity payment method selection screen showing a list of saved cards with radio button selection',
     },
     {
       src: '/assets/pluto-pay/high-fid/Pay Confirmation.png',
-      alt: 'High fidelity wireframe - Pay confirmation screen',
+      alt: 'High fidelity payment confirmation screen summarizing transaction details before final submission',
     },
     {
       src: '/assets/pluto-pay/high-fid/Payment Complete.png',
-      alt: 'High fidelity wireframe - Payment complete screen',
+      alt: 'High fidelity payment success screen with confirmation message, transaction ID, and return to dashboard CTA',
     },
     {
       src: '/assets/pluto-pay/high-fid/Add Payment - Card - Input + Filled.png',
-      alt: 'High fidelity wireframe - Add payment card input filled screen',
+      alt: 'High fidelity add payment method screen showing card number, expiry, and CVV fields in filled state with inline validation',
     },
     {
       src: '/assets/pluto-pay/high-fid/Payment Added.png',
-      alt: 'High fidelity wireframe - Payment added screen',
+      alt: 'High fidelity confirmation screen showing a newly added card with success state and option to set as default',
     },
   ]}
 />
+
+---
 
 ## Prototyping and Testing
 
-I built a prototype of the end-to-end user flows in order to user test and collect feedback from the UX community. Testing and feedback validated some of my assumptions and disproved others allowing me to catch any errors and further iterate on the experience. Having more perspectives on the experience greatly improved my own perspective and gave me more material to improve upon.
+I built an end-to-end prototype and ran it through two rounds of feedback: structured user testing and peer design review.
 
-#### User Testing Results and Changes
+### User Testing Results
 
-Conducting user tests and a/b test generated great feedback which I then analyzed and used to improve the prototype. I compiled the data in to suggested changes which I then implemented in my prototype.
+Testing surfaced three clear findings worth acting on:
 
-<ImageSlideshow
-  client:only="react"
-  images={[
-    {
-      src: '/assets/pluto-pay/usr-test-labels.jpeg',
-      alt: 'User journeys for PlutoPay',
-    },
-    {
-      src: '/assets/pluto-pay/usr-test-edit.jpeg',
-      alt: 'User journeys for PlutoPay',
-    },
-    {
-      src: '/assets/pluto-pay/usr-test-slider.jpeg',
-      alt: 'User journeys for PlutoPay',
-    },
-  ]}
-/>
+**Missing input labels on sign-up.** The sign-up form used placeholder text inside fields rather than persistent labels above them. One tester flagged it directly, and it turned out many others had found the form confusing without pinpointing exactly why — the absence of labels broke the consistency they expected from every other input in the app. Fix: added persistent labels above each field.
 
-#### Peer Collaboration
+**No way to edit at confirmation.** On the payment confirmation screen, users had no way to go back and correct a mistake short of canceling the whole flow and starting over. One tester caught this explicitly — if they spotted an error on the confirmation page, they'd have to restart entirely. Fix: added a back button to the confirmation screen.
 
-Throughout this project I had been working in a vacuum by myself to create PlutoPay and to combat this I reached out to my design community of peers to look over my design and give feedback. I then went through this feedback and decided what myself and my user research agreed with and implemented the changes into the PlutoPay prototype.
+**Slider vs. buttons (A/B test).** As noted above, the pay/request slider was tested against a two-button layout. 79% preferred buttons, 50% showed confusion with the slider. The slider was removed.
 
-<ImageSlideshow
-  client:only="react"
-  images={[
-    {
-      src: '/assets/pluto-pay/peer-collab-btn-size.jpeg',
-      alt: 'User journeys for PlutoPay',
-    },
-    {
-      src: '/assets/pluto-pay/peer-collab-data.jpeg',
-      alt: 'User journeys for PlutoPay',
-    },
-    {
-      src: '/assets/pluto-pay/peer-collab-forgot-pw.jpeg',
-      alt: 'User journeys for PlutoPay',
-    },
-  ]}
-/>
+### Peer Collaboration
 
-### Accessibility
+I shared the prototype with my design community for an additional round of feedback. Three changes came out of it:
 
-Many designs I received in my career as a front-end developer lacked accessibility annotations. Taking this experience I wanted to make sure that developers I work with as a designer do not have to be interaction designers for accessibility. I used Deque's axe tool in Figma to add annotations to my designs so that developers would know how to implement the design's accessibility attributes.
+**Button sizing.** Peer reviewers flagged that the button size-to-text ratio on the start screen was disproportionate — the buttons were too large relative to the 14pt text. Resolution: reduced button sizing to restore proportion without changing the text size.
 
-I also received feedback from my design peers on accessibility and implemented changes to the prototype.
+**Transaction data density.** The transactions screen showed "List item" placeholder text throughout rather than realistic data, making it hard for reviewers to evaluate whether the layout actually worked. Reviewer Olivia M: _"For a high-fidelity prototype, it would be helpful to see what this screen would really look like for the user."_ Fix: populated the transactions screen with realistic merchant names and amounts (McDonalds, Vet, Everlane, Rent, etc.) so the information hierarchy could be properly evaluated.
+
+**Missing forgot password.** The login screen had no forgot password path — a gap that's easy to miss when you're focused on the happy path. Reviewer Olivia M flagged it; Teresa Rodriguez-Hong agreed. Fix: added a "Forgot Password?" link below the password field.
+
+---
+
+## Accessibility
+
+This section reflects something I brought directly from my engineering background: I've received a lot of design handoffs in my career that were completely silent on accessibility, leaving developers to make interaction decisions that should have been made in design. I didn't want to do that to anyone working from PlutoPay's specs.
+
+I used Deque's axe plugin in Figma to annotate every screen with the accessibility attributes developers would need: ARIA roles, focus order, label associations, and interaction states for screen reader users. The goal was that a developer could implement these screens without guessing at a single accessibility decision.
+
+I also applied peer feedback on accessibility — adjusting color contrast ratios, increasing touch target sizes, and ensuring error messages were surfaced in a way that would be communicated to assistive technology, not just displayed visually.
 
 <ImageSlideshow
   client:only="react"
   images={[
     {
       src: '/assets/pluto-pay/a11y-btn.jpeg',
-      alt: 'User journeys for PlutoPay',
+      alt: 'Accessibility annotations for button components showing ARIA role, label, and state attributes alongside touch target size specifications',
     },
     {
       src: '/assets/pluto-pay/a11y-nav.jpeg',
-      alt: 'User journeys for PlutoPay',
+      alt: 'Accessibility annotations for the bottom navigation bar showing focus order, ARIA labels, and selected state communication for screen readers',
     },
     {
       src: '/assets/pluto-pay/a11y-input-label.jpeg',
-      alt: 'User journeys for PlutoPay',
+      alt: 'Accessibility annotations for form input fields showing label associations, error message ARIA live region markup, and required field indicators',
     },
     {
       src: '/assets/pluto-pay/a11y-annotate.jpeg',
-      alt: 'User journeys for PlutoPay',
+      alt: 'Full annotated screen view showing the complete accessibility spec layer applied to a PlutoPay payment form screen',
     },
   ]}
 />
 
-### Design System
+---
 
-After several iterations of changes based off of user test feedback and feedback from my colleagues, I finalized the UI of my designs and documented the design system for PlutoPay so that designers who work on this project in the future would be able to accurately depict PlutoPays branding in future iterations of the application.
+## Design System
 
-This design system is heavily inspired by Material Design Library and its design principles. Adhering closely to Material Design allowed me to study more closely how a large scale design system works and observe industry standard documentation and best practices for design systems.
+After finalizing the UI, I documented PlutoPay's design language — color, grid, typography, imagery guidelines, and a component library. This served a dual purpose: it locked in visual consistency across the prototype and created a reference any future designer could pick up and work from.
+
+I intentionally modeled this closely on Material Design. As someone newer to design systems at the time, studying how Google approached component documentation, token structure, and usage guidelines gave me a much stronger foundation than starting from scratch. Learning the conventions of a well-established system before diverging from it is a decision I'd make again.
 
 <ImageSlideshow
   client:only="react"
   images={[
     {
       src: '/assets/pluto-pay/design-colors.jpeg',
-      alt: 'User journeys for PlutoPay',
+      alt: 'PlutoPay color system documentation showing primary, secondary, and semantic color tokens with hex values and usage guidelines',
     },
     {
       src: '/assets/pluto-pay/design-grid.jpeg',
-      alt: 'User journeys for PlutoPay',
+      alt: 'PlutoPay grid system documentation showing column count, gutter widths, and margin specifications for mobile and responsive breakpoints',
     },
     {
       src: '/assets/pluto-pay/design-type.jpeg',
-      alt: 'User journeys for PlutoPay',
+      alt: 'PlutoPay typography scale showing typeface, weight, size, and line height specifications for headings, body text, labels, and captions',
     },
     {
       src: '/assets/pluto-pay/design-img.jpeg',
-      alt: 'User journeys for PlutoPay',
+      alt: 'PlutoPay imagery guidelines showing approved visual styles, aspect ratios, and examples of correct and incorrect image usage',
     },
     {
       src: '/assets/pluto-pay/design-ui-elements.jpeg',
-      alt: 'User journeys for PlutoPay',
+      alt: 'PlutoPay component library page one showing buttons, inputs, cards, and badge components with variants and states documented',
     },
     {
       src: '/assets/pluto-pay/design-ui-elements-2.jpeg',
-      alt: 'User journeys for PlutoPay',
+      alt: 'PlutoPay component library page two showing navigation, list items, modals, and form element components with variants and states',
     },
   ]}
 />
 
-### Challenges and Learnings
+---
+
+## Reflections
 
 <img
   src="/assets/pluto-pay/money-shot.png"
-  alt="User journeys for PlutoPay"
+  alt="Final high fidelity PlutoPay screens arranged in a polished presentation layout showing the dashboard, payment flow, and card management screens"
   style="width: 50%; margin-top: 16px;"
 />
 
-Fighting the urge to make things perfect was challenging. Keeping in mind the iterative design process and how it is cyclical and never finished helped me overcome this.
+**The slider was a good failure.** I went into A/B testing attached to the pay/request slider — it felt elegant and I'd put real thought into it. 79% of users wanted buttons with words on them. Killing it was the right call and a useful reminder that the most interesting interaction isn't always the most usable one.
 
-Collecting meaningful feedback from user testing was a challenge as often users still had the idea that it was a finished product and not a prototype. Clear communication and reminders throughout the testing process were necessary to remind users that everything is subject to change upon feedback.
+**Working alone is a risk.** For most of this project I had no design teammates to pressure-test ideas against. The peer review round caught real problems — including a missing forgot-password flow that I'd simply overlooked in the happy-path focus of early iterations. I build in peer review earlier and more often now, not as a final check but as a design tool.
 
-Finding the right balance between innovation and design conventions was ultimately challenging. During mid fidelity prototypes there was an initial concept for a slider for users to make either pay or request transactions. It was an innovative design but ultimately disliked by users during testing and was replaced with buttons instead.
+**Designing for the handoff changes how you design.** Coming in as an engineer who had worked from underspecified design files, I had strong opinions about what a useful handoff looks like. The accessibility annotations weren't a checkbox — they were me trying to be the kind of designer I wished I'd been handed specs from. That perspective has shaped every design systems role I've had since.

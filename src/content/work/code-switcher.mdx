@@ -1,0 +1,75 @@
+---
+title: Code Switcher
+publishDate: 2024-09-01 00:00:00
+img: /assets/code-switcher/code-switcher.png
+img_alt: Screenshot of the code switcher on a Visa design system component page, showing framework and version toggle controls above a live code example.
+description: |
+  I helped build the code switcher for Visa's public design system — a component that lets developers toggle documentation examples across multiple frameworks and versions, with their preference persisting across the entire site.
+tags:
+  - Engineering
+  - Design Systems
+---
+
+Visa's design system supports components across multiple front-end frameworks — React, Angular, Vue — each with multiple supported versions. Developers using the documentation need to see code examples that match their stack. Without a code switcher, the docs would either need to show every variant at once (overwhelming) or default to one framework (unhelpful for most users).
+
+I helped build the code switcher that shipped with the public launch of design.visa.com. My primary contribution was on the engineering side, with meaningful involvement in design conversations — particularly around the edge cases and technical constraints that shaped the UX.
+
+**My role:** Engineering lead on this component, close collaboration with a designer on UX decisions — especially edge cases where technical constraints shaped the interaction.
+**Tools:** TypeScript, Astro, URL params, localStorage
+
+---
+
+## The Problem
+
+The documentation site needed to serve developers working across a matrix of frameworks and versions. React 18 and React 17 have meaningfully different component APIs in some cases; Angular and Vue have entirely different patterns. A single static code block couldn't do the job.
+
+The challenge wasn't just building a tab switcher. It was building one that handled the full matrix of frameworks and versions gracefully — including the cases where an example didn't exist yet.
+
+---
+
+## Technical Approach
+
+### Framework × version matrix
+
+This wasn't a simple two-tab toggle. The switcher needed to support N frameworks, each with M versions, where N and M vary by component. Some components only support certain frameworks; some have deprecated versions. The component needed to represent the full matrix while keeping the UI clean — no tabs for combinations that don't exist, no dead states when the user picks a valid combination.
+
+### Hybrid persistence
+
+User preferences are persisted using a combination of URL parameters and localStorage.
+
+**URL params** handle shareability. If a developer sends a colleague a link to a component page with React 18 selected, the colleague sees React 18. The framework selection is part of the URL, not hidden in session state.
+
+**localStorage** handles cross-page navigation within a session. Users shouldn't have to re-select their framework on every page they visit. Once you've told the site you're a React developer, it should remember that until you change it.
+
+The two mechanisms work together: the URL takes precedence (for shared links), and localStorage fills in the default when the URL doesn't specify.
+
+### Edge case handling
+
+This is the part I'm most proud of.
+
+Not every component has examples for every framework/version combination. Some are in progress. Some have been deprecated. The switcher needed to handle these gaps without leaving users staring at a blank code block or an unexplained missing state.
+
+The cases I had to design for:
+- **Example not yet available**: Show a clear, specific message. Not a generic error — something that tells the user this combination is coming and what to do in the meantime.
+- **Version deprecated**: Surface a deprecation notice when the user selects a deprecated version, with a prompt to upgrade.
+- **Framework not supported for this component**: Disable the unavailable frameworks in the selector rather than letting users select them and hit a dead end.
+
+Getting all of these right required thinking through the matrix systematically — enumerating states rather than building to the happy path and patching problems later.
+
+---
+
+## Impact
+
+The code switcher is a core piece of the documentation experience for every component page on design.visa.com. It directly supports the site's multi-framework strategy and reduces friction for the 14,000+ users navigating the system.
+
+Without it, developers using Angular would be reading React examples and translating manually. With it, each developer sees documentation that matches their stack from the moment they land on a page.
+
+---
+
+## Reflections
+
+**Enumerate the states before you write the code.** The edge cases in the framework × version matrix weren't surprising in retrospect — they were predictable from the data model. Building out a full list of valid and invalid states before implementation meant I wasn't discovering missing cases through bugs.
+
+**Shareability is a real UX requirement, not a nice-to-have.** The URL param approach was more work than sessionStorage, but developers share links to documentation constantly. A framework selection that disappears when you copy the URL is a documentation bug, not just a minor inconvenience.
+
+**Design collaboration means bringing constraints to the conversation early.** The decisions that had the most impact on the UX — how to represent the matrix, how to handle missing states — came from conversations where I brought technical constraints in before the design was finalized. That's a different kind of collaboration than reviewing a finished spec for feasibility.
