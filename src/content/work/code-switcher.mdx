@@ -1,8 +1,8 @@
 ---
 title: Code Switcher
 publishDate: 2024-09-01 00:00:00
-img: /assets/code-switcher/code-switcher.png
-img_alt: Screenshot of the code switcher on a Visa design system component page, showing framework and version toggle controls above a live code example.
+img: /assets/visa-design-system/code-switcher-comparison.png
+img_alt: The Code library and Version dropdowns on design.visa.com with React selected, above a live code example showing the framework-specific implementation.
 description: |
   I helped build the code switcher for Visa's public design system — a component that lets developers toggle documentation examples across multiple frameworks and versions, with their preference persisting across the entire site.
 tags:
@@ -21,6 +21,12 @@ I helped build the code switcher that shipped with the public launch of design.v
 
 ## The Problem
 
+<img
+  src="/assets/visa-design-system/code-switcher-angular.png"
+  alt="Code library dropdown showing Angular selected, with a Version dropdown showing 7.0.0"
+  style="width: 420px; margin-top: 16px;"
+/>
+
 The documentation site needed to serve developers working across a matrix of frameworks and versions. React 18 and React 17 have meaningfully different component APIs in some cases; Angular and Vue have entirely different patterns. A single static code block couldn't do the job.
 
 The challenge wasn't just building a tab switcher. It was building one that handled the full matrix of frameworks and versions gracefully — including the cases where an example didn't exist yet.
@@ -32,6 +38,18 @@ The challenge wasn't just building a tab switcher. It was building one that hand
 ### Framework × version matrix
 
 This wasn't a simple two-tab toggle. The switcher needed to support N frameworks, each with M versions, where N and M vary by component. Some components only support certain frameworks; some have deprecated versions. The component needed to represent the full matrix while keeping the UI clean — no tabs for combinations that don't exist, no dead states when the user picks a valid combination.
+
+<img
+  src="/assets/visa-design-system/code-switcher-react.png"
+  alt="Code library dropdown showing React selected, with a Version dropdown"
+  style="width: 420px; margin-top: 16px;"
+/>
+
+<img
+  src="/assets/visa-design-system/code-switcher-comparison.png"
+  alt="Code library and Version dropdowns above a code block showing the React implementation example"
+  style="width: 100%; margin-top: 8px; margin-bottom: 16px;"
+/>
 
 ### Hybrid persistence
 
