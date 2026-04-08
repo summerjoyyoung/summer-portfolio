@@ -7,11 +7,11 @@ const currentYear = new Date().getFullYear();
 		<p>&copy; {currentYear} Summer Young</p>
 	</div>
 	<p class="socials">
-		<a href="https://linkedin.com/in/summerjoyyoung"> Linkedin</a>
-		<a href="https://github.com/summerjoyyoung"> GitHub</a>
-		<a href="https://codepen.io/summerjoyyoung"> CodePen</a>
-		<a href="https://dribbble.com/summerjoyyoung"> Dribbble</a>
-		<a href="https://behance.net/summer-young"> Behance</a>
+		<a class="link-underline" href="https://linkedin.com/in/summerjoyyoung"> Linkedin</a>
+		<a class="link-underline" href="https://github.com/summerjoyyoung"> GitHub</a>
+		<a class="link-underline" href="https://codepen.io/summerjoyyoung"> CodePen</a>
+		<a class="link-underline" href="https://dribbble.com/summerjoyyoung"> Dribbble</a>
+		<a class="link-underline" href="https://behance.net/summer-young"> Behance</a>
 	</p>
 </footer>
 <style>
@@ -26,17 +26,7 @@ const currentYear = new Date().getFullYear();
 		font-size: var(--text-sm);
 	}
 
-	footer a {
-		color: var(--gray-400);
-		text-decoration: 1px solid underline transparent;
-		text-underline-offset: 0.25em;
-		transition: text-decoration-color var(--theme-transition);
-	}
-
-	footer a:hover,
-	footer a:focus {
-		text-decoration-color: currentColor;
-	}
+	footer a { color: var(--gray-400); }
 
 	.group {
 		display: flex;

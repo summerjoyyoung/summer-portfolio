@@ -6,6 +6,7 @@
 import MainHead from '../components/MainHead.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import ThemeWrapper from '../components/ThemeWrapper.tsx';
 import { ClientRouter } from 'astro:transitions';
 
 interface Props {
@@ -29,7 +30,9 @@ const { title, description } = Astro.props;
 			<ClientRouter />
 			<Nav />
 		</header>
-		<slot />
+		<ThemeWrapper client:load>
+			<slot />
+		</ThemeWrapper>
 		<Footer />
 
 		<script>

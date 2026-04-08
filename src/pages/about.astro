@@ -61,24 +61,8 @@ import Hero from '../components/Hero.astro';
 	}
 
 	.section-title {
-		grid-column-start: 1;
 		font-size: var(--text-xl);
 		color: var(--gray-0);
-	}
-
-	.content {
-		grid-column: 2 / 4;
-	}
-
-	.content :global(a) {
-		text-decoration: 1px solid underline transparent;
-		text-underline-offset: 0.25em;
-		transition: text-decoration-color var(--theme-transition);
-	}
-
-	.content :global(a:hover),
-	.content :global(a:focus) {
-		text-decoration-color: currentColor;
 	}
 
 	@media (min-width: 50em) {
@@ -95,5 +79,8 @@ import Hero from '../components/Hero.astro';
 			display: contents;
 			font-size: var(--text-lg);
 		}
+
+		.section-title { grid-column-start: 1; }
+		.content { grid-column: 2 / 4; }
 	}
 </style>

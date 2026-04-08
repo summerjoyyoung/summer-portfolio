@@ -49,7 +49,7 @@ const headings: Heading[] = rawHeadings
 <BaseLayout title={entry.data.title} description={entry.data.description}>
   <main class="page-layout">
     <div class="page-header wrapper">
-      <a class="back-link" href="/work/"><Icon icon="arrow-left" /> Work</a>
+      <a class="back-link link-underline" href="/work/"><Icon icon="arrow-left" /> Work</a>
       <Hero title={entry.data.title} align="start">
         <div class="details">
           <div class="tags">
@@ -116,13 +116,13 @@ const headings: Heading[] = rawHeadings
     max-width: 54ch;
   }
 
-  /* Simple two-column layout */
   .page-layout {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    max-width: 83rem;
     margin: 0 auto;
-    padding: 0 5rem;
+    padding: 0 1.5rem;
     margin-bottom: 5rem;
     align-items: flex-start;
     min-height: calc(100vh - 101px);
@@ -130,32 +130,23 @@ const headings: Heading[] = rawHeadings
 
   .page-content {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 2rem;
   }
 
-  .sidebar {
-    flex-shrink: 0;
-    width: 250px;
-  }
+  .sidebar { display: none; }
 
-  .main-content {
-    flex: 1;
-    min-width: fill-available;
-  }
+  .main-content { flex: 1; min-width: 0; }
 
   .hero-image {
     width: 100%;
     margin-bottom: 2.5rem;
     border-radius: 1.5rem;
     box-shadow: var(--shadow-sm);
-    background: var(--gradient-subtle);
     border: 1px solid var(--gray-800);
   }
-  /* Content styling */
-  .main-content > :global(* + *) {
-    margin-top: 1rem;
-  }
+
+  .main-content > :global(* + *) { margin-top: 1rem; }
 
   .main-content :global(h1),
   .main-content :global(h2),
@@ -169,7 +160,6 @@ const headings: Heading[] = rawHeadings
   .main-content :global(img) {
     border-radius: 1.5rem;
     box-shadow: var(--shadow-sm);
-    background: var(--gradient-subtle);
     border: 1px solid var(--gray-800);
   }
 
@@ -183,47 +173,36 @@ const headings: Heading[] = rawHeadings
     color: var(--gray-0);
   }
 
-  .back-link,
   .main-content :global(a) {
     text-decoration: 1px solid underline transparent;
     text-underline-offset: 0.25em;
     transition: text-decoration-color var(--theme-transition);
   }
 
-  .back-link:hover,
-  .back-link:focus,
   .main-content :global(a:hover),
   .main-content :global(a:focus) {
     text-decoration-color: currentColor;
   }
 
-  /* Mobile: stack vertically */
-  @media (max-width: 768px) {
-    .page-layout {
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .page-content {
-      flex-direction: column;
-    }
-
-    .main-content {
-      min-width: fit-content;
-    }
-  }
-
   @media (min-width: 50em) {
-    .back-link {
+    .page-layout { padding: 0 3rem; }
+
+    .page-content { flex-direction: row; }
+
+    .sidebar {
       display: block;
+      flex-shrink: 0;
+      width: 250px;
     }
+
+    .back-link { display: block; }
 
     .details {
       flex-direction: row;
       gap: 2.5rem;
     }
 
-    .content :global(blockquote) {
+    .main-content :global(blockquote) {
       font-size: var(--text-2xl);
     }
   }
