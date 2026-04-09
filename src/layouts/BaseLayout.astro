@@ -1,7 +1,4 @@
 ---
-// Learn about using Astro layouts:
-// https://docs.astro.build/en/core-concepts/layouts/
-
 // Component Imports
 import MainHead from '../components/MainHead.astro';
 import Nav from '../components/Nav.astro';
@@ -10,34 +7,36 @@ import ThemeWrapper from '../components/ThemeWrapper.tsx';
 import { ClientRouter } from 'astro:transitions';
 
 interface Props {
-	title?: string | undefined;
-	description?: string | undefined;
+  title?: string | undefined;
+  description?: string | undefined;
 }
 
 const { title, description } = Astro.props;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
+<html lang="”en”">
+  <head>
+    <meta charset="”utf-8”" />
+    <meta name="”viewport”" content="”width=device-width”" />
 
-		<title>Summer Young: Personal Site</title>
-</head>
-	<body>
-		<header>
-			<MainHead title={title} description={description} />
-			<ClientRouter />
-			<Nav />
-		</header>
-		<ThemeWrapper client:load>
-			<slot />
-		</ThemeWrapper>
-		<Footer />
+    <title>Summer Young: Personal Site</title>
+  </head>
+  <body>
+    <header>
+      <MainHead title={title} description={description} />
+      <ClientRouter />
+      <Nav />
+    </header>
+    <ThemeWrapper client:load>
+      <slot />
+    </ThemeWrapper>
+    <Footer />
 
-		<script>
-			// Add “loaded” class once the document has completely loaded.
-			addEventListener('load', () => document.documentElement.classList.add('loaded'));
-		</script>
-	</body>
+    <script>
+      // Add “loaded” class once the document has completely loaded.
+      addEventListener('load', () =>
+        document.documentElement.classList.add('loaded')
+      );
+    </script>
+  </body>
 </html>
