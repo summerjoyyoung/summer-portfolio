@@ -43,15 +43,26 @@ export default function ImageSlideshow({ images }: ImageSlideshowProps) {
 
   return (
     <div style={styles.root}>
+      <style>{`
+        .slideshow-btn:hover:not(:disabled) {
+          color: var(--accent-regular);
+          border-color: var(--accent-regular);
+        }
+        .slideshow-btn:disabled {
+          opacity: 0.4;
+          cursor: default;
+        }
+      `}</style>
       <div style={styles.controls}>
         <button
           onClick={scrollPrev}
           disabled={!canScrollPrev}
           aria-label="Previous slide"
           style={styles.button}
+          className="slideshow-btn"
         >
-          <svg width="32" height="32" viewBox="0 0 256 256" aria-hidden="true">
-            <g dangerouslySetInnerHTML={{ __html: iconPaths['arrow-left'] }} />
+          <svg width="32" height="32" viewBox="0 0 16 16" aria-hidden="true">
+            <g dangerouslySetInnerHTML={{ __html: iconPaths['arrow-left'].path }} />
           </svg>
         </button>
         <span style={styles.indicator}>
@@ -62,9 +73,10 @@ export default function ImageSlideshow({ images }: ImageSlideshowProps) {
           disabled={!canScrollNext}
           aria-label="Next slide"
           style={styles.button}
+          className="slideshow-btn"
         >
-          <svg width="32" height="32" viewBox="0 0 256 256" aria-hidden="true">
-            <g dangerouslySetInnerHTML={{ __html: iconPaths['arrow-right'] }} />
+          <svg width="32" height="32" viewBox="0 0 16 16" aria-hidden="true">
+            <g dangerouslySetInnerHTML={{ __html: iconPaths['arrow-right'].path }} />
           </svg>
         </button>
       </div>
@@ -91,7 +103,7 @@ const styles: Record<string, React.CSSProperties> = {
   root: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '0.75rem',
+    gap: '0.5rem',
   },
   controls: {
     display: 'flex',
@@ -106,15 +118,15 @@ const styles: Record<string, React.CSSProperties> = {
     width: '2.5rem',
     height: '2.5rem',
     border: '1px solid var(--gray-800)',
-    borderRadius: '50%',
+    borderRadius: '999rem',
     background: 'var(--gray-999)',
     color: 'var(--gray-300)',
     cursor: 'pointer',
-    transition: 'background 0.15s, color 0.15s',
+    transition: 'color var(--theme-transition), border-color var(--theme-transition)',
   },
   indicator: {
     fontVariantNumeric: 'tabular-nums',
-    fontSize: '0.875rem',
+    fontSize: 'var(--text-sm)',
     color: 'var(--gray-400)',
     minWidth: '4rem',
     textAlign: 'center' as const,
