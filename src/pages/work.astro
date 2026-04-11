@@ -6,7 +6,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactCTA from '../components/ContactCTA.astro';
 import PortfolioPreview from '../components/PortfolioPreview.astro';
 import Hero from '../components/Hero.astro';
-import Grid from '../components/Grid.astro';
 import LayoutContainer from '../components/LayoutContainer.tsx';
 import LayoutFlex from '../components/LayoutFlex.tsx';
 
@@ -27,7 +26,7 @@ const projects = (await getCollection('work')).sort(
 					tagline="See my most recent projects below to get an idea of my past experience."
 					align="start"
 				/>
-				<Grid variant="offset">
+				<ul class="work-list">
 					{
 						projects.map((project) => (
 							<li>
@@ -35,9 +34,20 @@ const projects = (await getCollection('work')).sort(
 							</li>
 						))
 					}
-				</Grid>
+				</ul>
 			</LayoutFlex>
 		</LayoutContainer>
 		<ContactCTA />
 	</LayoutFlex>
 </BaseLayout>
+
+<style>
+	.work-list {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+</style>
