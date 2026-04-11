@@ -18,13 +18,11 @@ I designed and built a set of page-level actions to close that gap. The goal was
 **My role:** Design and build, end-to-end — from participating in the team discussions that surfaced the need, through UX exploration in Figma, to the final front-end implementation.
 **Tools:** Figma, TypeScript, Astro
 
-
 ## The Problem
 
 VPDS launched publicly serving 14,000+ active users across Visa. As LLM-assisted development became the norm, developers were increasingly pulling documentation into tools like ChatGPT and Claude to help with component implementation — but the workflow was painful. Manual select-all captured the wrong content, lost structural fidelity, and gave the model a garbled mess to work from.
 
 The team's goal was to make VPDS documentation AI-ready. No competitor enterprise design system had done this yet. The question was how to do it in a way that was fast, discoverable, and actually produced clean output.
-
 
 ## Design Decisions
 
@@ -56,19 +54,17 @@ Each action includes confirmation feedback so users know it worked. The copy act
 
 ### Markdown conversion quality
 
-This was the hardest part. Design system documentation pages are structurally complex — they include code blocks across multiple frameworks (React, Angular, Vue), data tables, nested lists, image references, and custom components like live code previews.
+This was the hardest part. Design system documentation pages are structurally complex — they include code blocks across multiple frameworks (React, Angular, Styles/CSS, Flutter), data tables, nested lists, image references, and custom components like live code previews.
 
 Getting the markdown output to be clean and actually useful when pasted into an LLM required careful handling of each content type. Code blocks needed language tags preserved. Tables needed to render as markdown tables, not visual noise. Custom components that don't translate to markdown needed to be omitted gracefully rather than output as broken HTML strings.
 
 The bar I held myself to: a developer should be able to paste the output directly into a prompt and get useful results back. Not a lossy copy that would confuse the model — documentation-quality markdown.
-
 
 ## Impact
 
 Recently shipped — quantitative adoption data is still being collected. The feature directly supports the team's goal of making VPDS documentation AI-ready, positioning Visa's design system ahead of most enterprise design systems that haven't yet adapted for LLM workflows.
 
 The feature works on every public documentation page, covering the full component library across all supported frameworks.
-
 
 ## Reflections
 
