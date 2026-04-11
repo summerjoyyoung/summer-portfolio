@@ -110,16 +110,24 @@ img { max-width: 100%; height: auto; }
 a { color: var(--link-color); }
 
 h1, h2, h3, h4, h5 {
-  line-height: 1.1;
+  line-height: 1.25;
   font-family: var(--font-brand);
   font-weight: 600;
   color: var(--gray-100);
 }
-h1 { font-size: var(--text-5xl); }
-h2 { font-size: var(--text-4xl); }
-h3 { font-size: var(--text-3xl); }
-h4 { font-size: var(--text-2xl); }
-h5 { font-size: var(--text-xl); }
+h1 { font-size: var(--text-2xl); }
+h2 { font-size: var(--text-xl); }
+h3 { font-size: var(--text-lg); }
+h4 { font-size: var(--text-md); }
+h5 { font-size: var(--text-base); }
+
+@media (min-width: 50em) {
+  h1 { font-size: var(--text-3xl); }
+  h2 { font-size: var(--text-2xl); }
+  h3 { font-size: var(--text-xl); }
+  h4 { font-size: var(--text-lg); }
+  h5 { font-size: var(--text-md); }
+}
 
 /* Utilities */
 .sr-only {
