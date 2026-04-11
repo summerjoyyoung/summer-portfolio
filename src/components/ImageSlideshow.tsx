@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import { iconPaths } from './IconPaths';
+import { ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons';
 
 interface ImageData {
   src: string;
@@ -61,9 +61,7 @@ export default function ImageSlideshow({ images }: ImageSlideshowProps) {
           style={styles.button}
           className="slideshow-btn"
         >
-          <svg width="32" height="32" viewBox="0 0 16 16" aria-hidden="true">
-            <g dangerouslySetInnerHTML={{ __html: iconPaths['arrow-left'].path }} />
-          </svg>
+          <ArrowLeftIcon width="32" height="32" aria-hidden="true" />
         </button>
         <span style={styles.indicator}>
           {selectedIndex + 1} of {totalSlides}
@@ -75,9 +73,7 @@ export default function ImageSlideshow({ images }: ImageSlideshowProps) {
           style={styles.button}
           className="slideshow-btn"
         >
-          <svg width="32" height="32" viewBox="0 0 16 16" aria-hidden="true">
-            <g dangerouslySetInnerHTML={{ __html: iconPaths['arrow-right'].path }} />
-          </svg>
+          <ArrowRightIcon width="32" height="32" aria-hidden="true" />
         </button>
       </div>
 

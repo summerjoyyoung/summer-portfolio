@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 import CallToAction from '../components/CallToAction.astro';
 import Hero from '../components/Hero.astro';
-import Icon from '../components/Icon.astro';
+import { CodeIcon, Pencil2Icon, ArrowRightIcon } from '@radix-ui/react-icons';
 import LayoutContainer from '../components/LayoutContainer.tsx';
 import LayoutFlex from '../components/LayoutFlex.tsx';
 import Pill from '../components/Pill.astro';
@@ -18,13 +18,13 @@ import Pill from '../components/Pill.astro';
         align="start"
       >
         <div class="roles">
-          <Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
-          <Pill><Icon icon="pencil-line" size="1.33em" /> Designer</Pill>
+          <Pill><CodeIcon width="1.33em" height="1.33em" aria-hidden="true" /> Developer</Pill>
+          <Pill><Pencil2Icon width="1.33em" height="1.33em" aria-hidden="true" /> Designer</Pill>
         </div>
         <div class="cta">
           <CallToAction href="/work/">
             View my work
-            <Icon icon="arrow-right" size="1.2em" />
+            <ArrowRightIcon width="1.2em" height="1.2em" aria-hidden="true" />
           </CallToAction>
         </div>
       </Hero>
