@@ -1,30 +1,40 @@
 @import '@radix-ui/themes/styles.css';
 
+/* Radix Colors — slate for gray scale, purple for accent */
+@import '@radix-ui/colors/slate.css';
+@import '@radix-ui/colors/slate-dark.css';
+@import '@radix-ui/colors/slate-alpha.css';
+@import '@radix-ui/colors/slate-dark-alpha.css';
+@import '@radix-ui/colors/purple.css';
+@import '@radix-ui/colors/purple-dark.css';
+@import '@radix-ui/colors/purple-alpha.css';
+@import '@radix-ui/colors/purple-dark-alpha.css';
+
 :root {
-  /* Colors — custom scale; Radix tokens (--accent-*, --gray-*) available via Theme wrapper */
-  --gray-0: #090b11;
-  --gray-50: #141925;
-  --gray-100: #283044;
-  --gray-200: #3d4663;
-  --gray-300: #505d84;
-  --gray-400: #6474a2;
-  --gray-500: #8490b5;
-  --gray-600: #a3acc8;
-  --gray-700: #c3cadb;
-  --gray-800: #e3e6ee;
-  --gray-900: #f3f4f7;
-  --gray-999-basis: 0, 0%, 100%;
-  --gray-999_40: hsla(var(--gray-999-basis), 0.4);
-  --gray-999: #ffffff;
+  /* Gray scale — mapped to Radix slate (1 = lightest bg, 12 = darkest text) */
+  --gray-0:   var(--slate-12);  /* headings, high-contrast text */
+  --gray-50:  var(--slate-12);
+  --gray-100: var(--slate-11);  /* dark body text */
+  --gray-200: var(--slate-11);
+  --gray-300: var(--slate-10);  /* secondary text */
+  --gray-400: var(--slate-9);   /* muted text, descriptions */
+  --gray-500: var(--slate-8);
+  --gray-600: var(--slate-7);
+  --gray-700: var(--slate-6);
+  --gray-800: var(--slate-5);   /* borders, dividers */
+  --gray-900: var(--slate-2);   /* subtle backgrounds */
+  --gray-999: var(--slate-1);   /* main page background */
+  --gray-999_40: var(--slate-a4);
 
-  --accent-light: #c561f6;
-  --accent-regular: #7611a6;
-  --accent-dark: #1c0056;
-  --accent-overlay: hsla(280, 89%, 67%, 0.33);
-  --accent-subtle-overlay: var(--accent-overlay);
-  --accent-text-over: var(--gray-999);
+  /* Accent — mapped to Radix purple */
+  --accent-light:          var(--purple-10);
+  --accent-regular:        var(--purple-9);   /* solid color: buttons, badges */
+  --accent-dark:           var(--purple-11);  /* high-contrast text/links */
+  --accent-overlay:        var(--purple-a6);
+  --accent-subtle-overlay: var(--purple-a4);
+  --accent-text-over:      var(--slate-1);
 
-  --link-color: var(--accent-regular);
+  --link-color: var(--purple-11);  /* step 11 = readable on both light and dark bg */
 
   /* Shadows */
   --shadow-sm: 0 1px 2px rgba(9, 11, 17, 0.04), 0 0 1px rgba(9, 11, 17, 0.06);
@@ -49,33 +59,12 @@
   --theme-transition: 0.2s ease-in-out;
 }
 
+/* Dark mode — Radix Colors dark CSS files handle all color flips via the .dark class.
+   Only shadows need manual overrides since box-shadow values can't reference the alpha scale directly. */
 :root.dark {
-  --gray-0: #ffffff;
-  --gray-50: #f3f4f7;
-  --gray-100: #e3e6ee;
-  --gray-200: #c3cadb;
-  --gray-300: #a3acc8;
-  --gray-400: #8490b5;
-  --gray-500: #6474a2;
-  --gray-600: #505d84;
-  --gray-700: #3d4663;
-  --gray-800: #283044;
-  --gray-900: #141925;
-  --gray-999-basis: 225, 31%, 5%;
-  --gray-999: #090b11;
-
-  --accent-light: #1c0056;
-  --accent-regular: #7611a6;
-  --accent-dark: #c561f6;
-  --accent-overlay: hsla(280, 89%, 67%, 0.33);
-  --accent-subtle-overlay: hsla(281, 81%, 36%, 0.33);
-  --accent-text-over: var(--gray-0);
-
-  --link-color: var(--accent-dark);
-
-  --shadow-sm: 0 1px 2px rgba(255, 255, 255, 0.03), 0 0 1px rgba(255, 255, 255, 0.05);
-  --shadow-md: 0 4px 12px rgba(255, 255, 255, 0.04), 0 1px 3px rgba(255, 255, 255, 0.06);
-  --shadow-lg: 0 12px 32px rgba(255, 255, 255, 0.06), 0 4px 8px rgba(255, 255, 255, 0.08);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3),  0 0 1px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.45);
 }
 
 /* Base */
@@ -105,6 +94,7 @@ body {
    contributes zero) cleanly without !important. */
 .radix-themes[data-is-root-theme='true'] {
   min-height: 0;
+  background-color: transparent;
 }
 
 *, *::after, *::before {
