@@ -17,7 +17,6 @@ I was the engineering owner of the code switcher that shipped with the public la
 **My role:** Engineering owner, close design collaboration on constraint-driven UX decisions
 **Tools:** TypeScript, Astro, URL params, localStorage
 
-
 ## The Problem
 
 <img
@@ -26,10 +25,9 @@ I was the engineering owner of the code switcher that shipped with the public la
   style="width: 420px; margin-top: 16px;"
 />
 
-The documentation site needed to serve developers working across a matrix of frameworks and versions. React 18 and React 17 have meaningfully different component APIs in some cases; Angular, Vue, and Flutter have entirely different patterns. A single static code block couldn't do the job.
+The documentation site needed to serve developers working across a matrix of frameworks and versions. React 18 and React 17 have meaningfully different component APIs in some cases; Angular, Styles/CSS, React, and Flutter have entirely different patterns. A single static code block couldn't do the job.
 
 The challenge wasn't just building a tab switcher. It was building one that handled the full matrix of frameworks and versions gracefully — including the cases where an example didn't exist yet, and the problem of what happens when a user's preference can't be honored on a given page.
-
 
 ## A Novel Design Decision: Page-Level vs. Global Switcher
 
@@ -45,14 +43,7 @@ The decision the team landed on was to make the switcher a page-level control, s
   style="width: 420px; margin-top: 16px;"
 />
 
-<img
-  src="/assets/visa-design-system/code-switcher-comparison.png"
-  alt="Code library and Version dropdowns above a code block showing the React implementation example"
-  style="width: 100%; margin-top: 8px; margin-bottom: 16px;"
-/>
-
 Moving the switcher to page-level introduced a new engineering challenge: how do you respect a user's framework preference across pages when some pages can't honor it? A developer who selects React shouldn't have to re-select it on every page they visit — but if they navigate to a component that only supports Angular, something has to give.
-
 
 ## Technical Approach
 
@@ -77,19 +68,18 @@ Silent switching was explicitly ruled out. From an accessibility standpoint, whe
 Not every component has examples for every framework/version combination. Some are in progress. Some have been deprecated. The switcher needed to handle these gaps without leaving users staring at a blank code block or an unexplained missing state.
 
 The cases I built for:
+
 - **Example not yet available**: Show a clear, specific message — not a generic error, but something that tells the user this combination is coming and what to do in the meantime.
 - **Version deprecated**: Surface a deprecation notice when the user selects a deprecated version, with a prompt to upgrade.
 - **Framework not supported for this component**: Disable the unavailable frameworks in the selector rather than letting users select them and hit a dead end.
 
 Getting all of these right required enumerating states systematically rather than building to the happy path and patching problems later.
 
-
 ## Impact
 
 The code switcher is a core piece of the documentation experience for every component page on design.visa.com. It directly supports the site's multi-framework strategy and reduces friction for the 14,000+ users navigating the system.
 
 Without it, developers using Angular would be reading React examples and translating manually. With it, each developer sees documentation that matches their stack from the moment they land on a page.
-
 
 ## Reflections
 
