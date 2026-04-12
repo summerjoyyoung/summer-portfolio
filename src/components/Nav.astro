@@ -131,6 +131,12 @@ const textLinks: { label: string; href: string }[] = [
     padding: 24px;
   }
 
+  @media (max-width: 799px) {
+    .menu-header:has(.menu-button[aria-expanded='true']) {
+      background-color: var(--gray-999);
+    }
+  }
+
   .site-title {
     display: flex;
     gap: 8px;
@@ -199,26 +205,6 @@ const textLinks: { label: string; href: string }[] = [
     box-shadow: var(--shadow-md);
   }
 
-  .socials {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    font-size: var(--icon-size);
-  }
-
-  .social {
-    display: flex;
-    padding: var(--icon-padding);
-    text-decoration: none;
-    color: var(--accent-dark);
-    transition: color var(--theme-transition);
-  }
-
-  .social:hover,
-  .social:focus {
-    color: var(--accent-regular);
-  }
-
   .theme-toggle {
     display: flex;
     align-items: center;
@@ -282,17 +268,6 @@ const textLinks: { label: string; href: string }[] = [
       box-shadow: none;
     }
 
-    .socials {
-      display: none;
-    }
-  }
-
-  @media (min-width: 960px) {
-    .socials {
-      display: flex;
-      justify-content: flex-end;
-      gap: 0;
-    }
   }
 
   @media (forced-colors: active) {
