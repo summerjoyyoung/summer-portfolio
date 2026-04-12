@@ -20,7 +20,7 @@ const { title, description } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
 
-    <title>Summer Young: Personal Site</title>
+    <title>{title ? `Summer Young: ${title}` : 'Summer Young'}</title>
   </head>
   <body>
     <header>
