@@ -48,7 +48,7 @@ const { data, slug } = Astro.props.project;
     height: 80px;
     flex-shrink: 0;
     overflow: hidden;
-    border-radius: var(--radius-2);
+    border-radius: var(--border-radius);
   }
 
   img {
@@ -81,7 +81,7 @@ const { data, slug } = Astro.props.project;
     overflow: hidden;
   }
 
-  @media (min-width: 50em) {
+  @media (min-width: 800px) {
     .card {
       gap: 28px;
       padding: 20px 24px;
@@ -90,7 +90,7 @@ const { data, slug } = Astro.props.project;
     .img-wrapper {
       width: 160px;
       height: 112px;
-      border-radius: var(--radius-3);
+      border-radius: var(--border-radius);
     }
 
     .title {

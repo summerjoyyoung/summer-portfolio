@@ -130,7 +130,7 @@ const headings: Heading[] = rawHeadings
     min-height: calc(100vh - 101px);
   }
 
-  @media (min-width: 50em) {
+  @media (min-width: 800px) {
     .page-layout { padding-inline: 48px; }
   }
 
@@ -147,7 +147,7 @@ const headings: Heading[] = rawHeadings
   .hero-image {
     width: 100%;
     margin-bottom: 40px;
-    border-radius: 24px;
+    border-radius: var(--border-radius);
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--gray-800);
   }
@@ -165,7 +165,7 @@ const headings: Heading[] = rawHeadings
   }
 
   .main-content :global(img) {
-    border-radius: 24px;
+    border-radius: var(--border-radius);
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--gray-800);
   }
@@ -191,7 +191,7 @@ const headings: Heading[] = rawHeadings
     text-decoration-color: currentColor;
   }
 
-  @media (min-width: 50em) {
+  @media (min-width: 800px) {
 
     .page-content { flex-direction: row; }
 

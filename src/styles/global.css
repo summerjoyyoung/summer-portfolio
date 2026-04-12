@@ -58,6 +58,10 @@
 
   --theme-transition: 0.2s ease-in-out;
 
+  /* Border radius */
+  --border-radius: 12px;
+  --border-radius-full: 9999px;
+
   /* Atmospheric layer tokens (used on the index page) */
   --dot-color:    rgba(0, 0, 0, 0.10);
   --bloom-color:  rgba(130, 58, 185, 0.08);
@@ -136,7 +140,7 @@ h3 { font-size: var(--text-lg); }
 h4 { font-size: var(--text-md); }
 h5 { font-size: var(--text-base); }
 
-@media (min-width: 50em) {
+@media (min-width: 800px) {
   h1 { font-size: var(--text-3xl); }
   h2 { font-size: var(--text-2xl); }
   h3 { font-size: var(--text-xl); }

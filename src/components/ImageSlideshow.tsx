@@ -116,7 +116,7 @@ const styles: Record<string, React.CSSProperties> = {
     width: '40px',
     height: '40px',
     border: '1px solid var(--gray-800)',
-    borderRadius: '9999px',
+    borderRadius: 'var(--border-radius-full)',
     background: 'var(--gray-999)',
     color: 'var(--gray-300)',
     cursor: 'pointer',
@@ -131,7 +131,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   viewport: {
     overflow: 'hidden',
-    borderRadius: 'var(--radius-3)',
+    borderRadius: 'var(--border-radius)',
   },
   container: {
     display: 'flex',
