@@ -81,11 +81,11 @@ export default function ImageSlideshow({ images, height }: ImageSlideshowProps) 
       <div ref={emblaRef} style={styles.viewport}>
         <div style={styles.container}>
           {images.map((image, index) => (
-            <div key={index} style={styles.slide}>
+            <div key={index} style={height ? { ...styles.slide, display: 'flex', justifyContent: 'center' } : styles.slide}>
               <img
                 src={image.src}
                 alt={image.alt}
-                style={height ? { ...styles.image, height, objectFit: 'cover' } : styles.image}
+                style={height ? { height, width: 'auto', maxWidth: '100%', display: 'block' } : styles.image}
                 loading="lazy"
               />
             </div>
@@ -101,6 +101,7 @@ const styles: Record<string, React.CSSProperties> = {
     display: 'flex',
     flexDirection: 'column',
     gap: '8px',
+    margin: '24px 0',
   },
   controls: {
     display: 'flex',
