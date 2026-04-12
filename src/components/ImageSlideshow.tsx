@@ -9,9 +9,10 @@ interface ImageData {
 
 interface ImageSlideshowProps {
   images: ImageData[];
+  height?: string;
 }
 
-export default function ImageSlideshow({ images }: ImageSlideshowProps) {
+export default function ImageSlideshow({ images, height }: ImageSlideshowProps) {
   const totalSlides = images.length;
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -84,7 +85,7 @@ export default function ImageSlideshow({ images }: ImageSlideshowProps) {
               <img
                 src={image.src}
                 alt={image.alt}
-                style={styles.image}
+                style={height ? { ...styles.image, height, objectFit: 'cover' } : styles.image}
                 loading="lazy"
               />
             </div>
@@ -99,22 +100,22 @@ const styles: Record<string, React.CSSProperties> = {
   root: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '0.5rem',
+    gap: '8px',
   },
   controls: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: '1rem',
+    gap: '16px',
   },
   button: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '2.5rem',
-    height: '2.5rem',
+    width: '40px',
+    height: '40px',
     border: '1px solid var(--gray-800)',
-    borderRadius: '999rem',
+    borderRadius: '9999px',
     background: 'var(--gray-999)',
     color: 'var(--gray-300)',
     cursor: 'pointer',
@@ -124,7 +125,7 @@ const styles: Record<string, React.CSSProperties> = {
     fontVariantNumeric: 'tabular-nums',
     fontSize: 'var(--text-sm)',
     color: 'var(--gray-400)',
-    minWidth: '4rem',
+    minWidth: '64px',
     textAlign: 'center' as const,
   },
   viewport: {

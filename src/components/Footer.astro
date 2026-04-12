@@ -3,59 +3,72 @@ const currentYear = new Date().getFullYear();
 ---
 
 <footer>
-	<div class="group">
-		<p>&copy; {currentYear} Summer Young</p>
-	</div>
-	<p class="socials">
-		<a class="link-underline" href="https://linkedin.com/in/summerjoyyoung"> Linkedin</a>
-		<a class="link-underline" href="https://github.com/summerjoyyoung"> GitHub</a>
-		<a class="link-underline" href="https://codepen.io/summerjoyyoung"> CodePen</a>
-		<a class="link-underline" href="https://dribbble.com/summerjoyyoung"> Dribbble</a>
-		<a class="link-underline" href="https://behance.net/summer-young"> Behance</a>
-	</p>
+  <div class="group">
+    <p>&copy; {currentYear} Summer Young</p>
+  </div>
+  <p class="socials">
+    <a class="link-underline" href="https://linkedin.com/in/summerjoyyoung">
+      Linkedin</a
+    >
+    <a class="link-underline" href="https://github.com/summerjoyyoung">
+      GitHub</a
+    >
+    <a class="link-underline" href="https://codepen.io/summerjoyyoung">
+      CodePen</a
+    >
+    <a class="link-underline" href="https://dribbble.com/summerjoyyoung">
+      Dribbble</a
+    >
+    <a class="link-underline" href="https://behance.net/summer-young">
+      Behance</a
+    >
+  </p>
 </footer>
 <style>
-	footer {
-		display: flex;
-		flex-direction: column;
-		gap: 3rem;
-		margin-top: auto;
-		padding: 3rem 2rem 3rem;
-		text-align: center;
-		color: var(--gray-400);
-		font-size: var(--text-sm);
-	}
+  footer {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    margin-top: auto;
+    padding: 48px 32px 48px;
+    text-align: center;
+    color: var(--gray-400);
+    font-size: var(--text-sm);
+  }
 
-	footer a { color: var(--gray-400); }
+  footer a {
+    color: var(--gray-400);
+  }
 
-	.group {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
+  .group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
 
-	.socials {
-		display: flex;
-		justify-content: center;
-		gap: 1rem;
-		flex-wrap: wrap;
-	}
+  .socials {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
 
-	@media (min-width: 50em) {
-		footer {
-			flex-direction: row;
-			justify-content: space-between;
-			padding: 2.5rem 5rem;
-		}
+  @media (min-width: 50em) {
+    footer {
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 40px 80px;
+      margin-inline: 24px;
+    }
 
-		.group {
-			flex-direction: row;
-			gap: 1rem;
-			flex-wrap: wrap;
-		}
+    .group {
+      flex-direction: row;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
 
-		.socials {
-			justify-content: flex-end;
-		}
-	}
+    .socials {
+      justify-content: flex-end;
+    }
+  }
 </style>

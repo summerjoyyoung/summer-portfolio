@@ -10,35 +10,74 @@ import Pill from '../components/Pill.astro';
 ---
 
 <BaseLayout>
-  <LayoutFlex gap="9">
-    <LayoutContainer as="main">
-      <Hero
-        title="Hey! I'm Summer Young"
-        tagline="I am a Design Engineer who is currently based in Seattle, Washington."
-        align="start"
-      >
-        <div class="roles">
-          <Pill><CodeIcon width="1.33em" height="1.33em" aria-hidden="true" /> Developer</Pill>
-          <Pill><Pencil2Icon width="1.33em" height="1.33em" aria-hidden="true" /> Designer</Pill>
-        </div>
-        <div class="cta">
-          <CallToAction href="/work/">
-            View my work
-            <ArrowRightIcon width="1.2em" height="1.2em" aria-hidden="true" />
-          </CallToAction>
-        </div>
-      </Hero>
-    </LayoutContainer>
+  <!-- Atmospheric layers — fixed, purely visual, behind all content -->
+  <div class="bloom" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
 
-  </LayoutFlex>
+  <!-- Page content sits above the atmospheric layers -->
+  <div class="page-content">
+    <LayoutFlex gap="9">
+      <LayoutContainer as="main">
+        <Hero
+          title="Hey! I'm Summer Young"
+          tagline="I am a Design Engineer who is currently based in Seattle, Washington."
+          align="start"
+          meta="Seattle, WA · Design Engineer"
+          large
+        >
+          <div class="roles">
+            <Pill><CodeIcon width="1.33em" height="1.33em" aria-hidden="true" /> Developer</Pill>
+            <Pill><Pencil2Icon width="1.33em" height="1.33em" aria-hidden="true" /> Designer</Pill>
+          </div>
+          <div class="cta">
+            <CallToAction href="/work/">
+              View my work
+              <ArrowRightIcon width="1.2em" height="1.2em" aria-hidden="true" />
+            </CallToAction>
+          </div>
+        </Hero>
+      </LayoutContainer>
+    </LayoutFlex>
+  </div>
 </BaseLayout>
 
 <style>
+  /* ── Atmospheric layers ── */
+
+  /* Purple bloom — soft radial glow behind the hero */
+  .bloom {
+    position: fixed;
+    top: -15vh;
+    left: -8vw;
+    width: 75vw;
+    height: 80vh;
+    background: radial-gradient(ellipse at 38% 42%, var(--bloom-color) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* 3. Grain — SVG feTurbulence noise tiled over the surface */
+  .grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ── Content elevation — sits above z-index: 0 layers ── */
+  .page-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Existing hero slot styles ── */
   .roles {
     display: flex;
-    gap: 0.5rem;
+    gap: 8px;
     flex-wrap: wrap;
-    margin-top: 1.5rem;
+    margin-top: 24px;
     justify-content: center;
   }
 
@@ -49,6 +88,6 @@ import Pill from '../components/Pill.astro';
   }
 
   .cta {
-    margin-top: 1.5rem;
+    margin-top: 24px;
   }
 </style>

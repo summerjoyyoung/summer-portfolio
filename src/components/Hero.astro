@@ -3,12 +3,15 @@ interface Props {
   title: string;
   tagline?: string;
   align?: 'start' | 'center';
+  meta?: string;
+  large?: boolean;
 }
 
-const { align = 'center', tagline, title } = Astro.props;
+const { align = 'center', tagline, title, meta, large = false } = Astro.props;
 ---
 
-<div class:list={['hero', align]}>
+<div class:list={['hero', align, { large }]}>
+  {meta && <div class="hero-meta">{meta}</div>}
   <div class="hero-text">
     <h1 class="title">{title}</h1>
     {tagline && <p class="tagline">{tagline}</p>}
@@ -42,6 +45,28 @@ const { align = 'center', tagline, title } = Astro.props;
     color: var(--gray-0);
   }
 
+  /* Metadata caption — "Seattle, WA · Design Engineer" with extending rule */
+  .hero-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--font-brand);
+    font-size: var(--text-sm);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    justify-content: center;
+  }
+
+  .hero-meta::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gray-700);
+    flex-shrink: 0;
+  }
+
   @media (min-width: 50em) {
     .hero {
       font-size: var(--text-xl);
@@ -56,8 +81,16 @@ const { align = 'center', tagline, title } = Astro.props;
       margin-inline: unset;
     }
 
+    .start .hero-meta {
+      justify-content: flex-start;
+    }
+
     .title {
       font-size: var(--text-4xl);
+    }
+
+    .large .title {
+      font-size: var(--text-5xl);
     }
   }
 </style>

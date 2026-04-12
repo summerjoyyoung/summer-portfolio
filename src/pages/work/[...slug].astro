@@ -87,29 +87,29 @@ const headings: Heading[] = rawHeadings
 <style>
   .page-header {
     width: 100%;
-    padding-bottom: 2.5rem;
+    padding-bottom: 40px;
     border-bottom: 1px solid var(--gray-800);
-    margin-bottom: 3.75rem;
-    padding-inline: 0rem;
+    margin-bottom: 60px;
+    padding-inline: 0px;
   }
 
   .back-link {
     display: none;
-    margin-bottom: 0.5rem;
+    margin-bottom: 8px;
   }
 
   .details {
     display: flex;
     flex-direction: column;
-    padding: 0.5rem;
-    gap: 1.5rem;
+    padding: 8px;
+    gap: 24px;
     justify-content: space-between;
     align-items: center;
   }
 
   .tags {
     display: flex;
-    gap: 0.5rem;
+    gap: 8px;
   }
 
   .description {
@@ -120,24 +120,24 @@ const headings: Heading[] = rawHeadings
   .page-layout {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 32px;
     width: 100%;
-    max-width: 83rem;
+    max-width: 1328px;
     margin-inline: auto;
-    padding-inline: 1.5rem;
-    margin-bottom: 5rem;
+    padding-inline: 24px;
+    margin-bottom: 80px;
     align-items: flex-start;
     min-height: calc(100vh - 101px);
   }
 
   @media (min-width: 50em) {
-    .page-layout { padding-inline: 3rem; }
+    .page-layout { padding-inline: 48px; }
   }
 
   .page-content {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 32px;
   }
 
   .sidebar { display: none; }
@@ -146,13 +146,13 @@ const headings: Heading[] = rawHeadings
 
   .hero-image {
     width: 100%;
-    margin-bottom: 2.5rem;
-    border-radius: 1.5rem;
+    margin-bottom: 40px;
+    border-radius: 24px;
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--gray-800);
   }
 
-  .main-content > :global(* + *) { margin-top: 1rem; }
+  .main-content > :global(* + *) { margin-top: 16px; }
 
   .main-content :global(h1),
   .main-content :global(h2),
@@ -161,11 +161,11 @@ const headings: Heading[] = rawHeadings
   .main-content :global(h5) {
     margin-top: var(--space-7);
     margin-bottom: var(--space-3);
-    scroll-margin-top: 2rem;
+    scroll-margin-top: 32px;
   }
 
   .main-content :global(img) {
-    border-radius: 1.5rem;
+    border-radius: 24px;
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--gray-800);
   }
@@ -175,8 +175,8 @@ const headings: Heading[] = rawHeadings
     font-family: var(--font-brand);
     font-weight: 600;
     line-height: 1.1;
-    padding-inline-start: 1.5rem;
-    border-inline-start: 0.25rem solid var(--accent-dark);
+    padding-inline-start: 24px;
+    border-inline-start: 4px solid var(--accent-dark);
     color: var(--gray-0);
   }
 
@@ -205,7 +205,7 @@ const headings: Heading[] = rawHeadings
 
     .details {
       flex-direction: row;
-      gap: 2.5rem;
+      gap: 40px;
     }
 
     .main-content :global(blockquote) {

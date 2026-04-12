@@ -36,39 +36,50 @@ const { headings } = Astro.props;
 <style>
   .table-of-contents {
     position: sticky;
-    top: 2rem;
+    top: 32px;
     width: 250px;
-    max-height: calc(100vh - 4rem);
+    max-height: calc(100vh - 64px);
     overflow-y: auto;
-    padding: 1.25rem;
+    padding: 20px;
+    background-color: var(--color-surface);
     border: 1px solid var(--gray-800);
-    border-radius: 0.75rem;
+    border-radius: 12px;
   }
 
   .toc-title {
     font-size: var(--text-base);
     font-weight: 600;
     color: var(--gray-0);
-    margin: 0 0 0.75rem 0;
-    padding-bottom: 0.5rem;
+    margin: 0 0 12px 0;
+    padding-bottom: 8px;
     border-bottom: 1px solid var(--gray-800);
   }
 
-  .toc-list { list-style: none; margin: 0; padding: 0; }
-  .toc-item { margin-bottom: 0.25rem; }
-  .toc-item--h3 { margin-left: 1rem; }
+  .toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .toc-item {
+    margin-bottom: 4px;
+  }
+  .toc-item--h3 {
+    margin-left: 16px;
+  }
 
   .toc-link {
     display: block;
-    padding: 0.25rem 0.5rem;
+    padding: 4px 8px;
     color: var(--gray-300);
     text-decoration: none;
     font-size: var(--text-sm);
-    border-radius: 0.25rem;
+    border-radius: 4px;
     transition: color var(--theme-transition);
   }
 
-  .toc-link:hover { color: var(--accent-regular); }
+  .toc-link:hover {
+    color: var(--accent-regular);
+  }
 
   .toc-link.active {
     color: var(--accent-regular);
