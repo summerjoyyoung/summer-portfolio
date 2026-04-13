@@ -36,6 +36,8 @@
     "eslint": "^9.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-astro": "^1.2.0",
+    "gif-encoder-2": "^1.0.5",
+    "pngjs": "^7.0.0",
     "prettier": "^3.3.0",
     "prettier-plugin-astro": "^0.14.0"
   }
