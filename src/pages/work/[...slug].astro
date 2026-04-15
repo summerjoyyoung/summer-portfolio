@@ -84,6 +84,50 @@ const headings: Heading[] = rawHeadings
   <ContactCTA />
 </BaseLayout>
 
+<script>
+  import Gifa11y from 'gifa11y';
+
+  // Wrap each GIF so the absolute-positioned pause button anchors to the
+  // image, not the viewport. Move the image's vertical margins onto the
+  // wrapper so the button doesn't float in the margin space above the GIF.
+  document.querySelectorAll('.main-content img[src$=".gif"]').forEach((img) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'gifa11y-wrap';
+    wrap.style.marginTop = img.style.marginTop;
+    wrap.style.marginBottom = img.style.marginBottom;
+    img.style.marginTop = '';
+    img.style.marginBottom = '';
+    img.replaceWith(wrap);
+    wrap.appendChild(img);
+  });
+
+  const instance = new Gifa11y({
+    container: '.main-content',
+    buttonBackground: 'var(--accent-regular)',
+    buttonBackgroundHover: 'var(--accent-dark)',
+    buttonBorder: '1px solid var(--gray-800)',
+    buttonBorderRadius: 'var(--border-radius-full)',
+    buttonIconColor: 'var(--accent-text-over)',
+    buttonFocusColor: 'var(--accent-overlay)',
+    buttonIconSize: '1rem',
+  });
+
+  // Astro module scripts run after DOMContentLoaded, so gifa11y's
+  // internal listener never fires. Trigger findNew() manually if the
+  // DOM is already ready.
+  if (document.readyState !== 'loading') {
+    instance.findNew();
+  }
+
+  // box-shadow and position are hardcoded inside gifa11y's shadow DOM.
+  // Inject overrides: remove the drop shadow and anchor the button to top-right.
+  document.querySelectorAll('.main-content gifa11y-button').forEach((host) => {
+    const s = document.createElement('style');
+    s.textContent = 'button { box-shadow: none; inset: 0 0 auto auto; }';
+    host.shadowRoot?.appendChild(s);
+  });
+</script>
+
 <style>
   .page-header {
     width: 100%;
@@ -168,6 +212,10 @@ const headings: Heading[] = rawHeadings
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--gray-800);
+  }
+
+  .main-content :global(.gifa11y-wrap) {
+    position: relative;
   }
 
   .main-content :global(blockquote) {
