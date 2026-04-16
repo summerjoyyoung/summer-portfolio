@@ -46,7 +46,7 @@ const headings: Heading[] = rawHeadings
   }));
 ---
 
-<BaseLayout title={entry.data.title} description={entry.data.description}>
+<BaseLayout title={entry.data.title} description={entry.data.description} protected={entry.data.protected}>
   <main class="page-layout">
     <div class="page-header">
       <a class="back-link link-underline" href="/work/"><ArrowLeftIcon width="1em" height="1em" aria-hidden="true" style={{ verticalAlign: 'middle' }} /> Work</a>

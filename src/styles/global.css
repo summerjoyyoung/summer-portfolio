@@ -176,3 +176,14 @@ th, td {
   border: 1px solid var(--gray-800);
   padding: 8px;
 }
+
+/* Password gate: hide content on protected pages until authenticated */
+html[data-protected] body > *:not(.password-gate) {
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+html[data-protected] body {
+  overflow: hidden;
+}
