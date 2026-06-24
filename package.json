@@ -27,7 +27,7 @@
     "gifa11y": "^2.3.0",
     "playwright": "^1.61.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react-dom": "^19.2.7",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
