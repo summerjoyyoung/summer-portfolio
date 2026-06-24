@@ -28,6 +28,40 @@ The team's goal was to make VPDS documentation AI-ready. The question was how to
 
 ### Placement and visibility
 
+I started by looking at how other developer-facing doc sites were handling this. Stripe's API reference had added per-section "Copy for LLM" and "View as Markdown" buttons anchored to each heading. Cloudflare Docs shipped a "Copy page" dropdown that could open the page directly in Claude or ChatGPT. Both confirmed the pattern was worth building — but neither mapped directly to VPDS's page structure.
+
+<img
+  src="/assets/visa-design-system/page-actions-stripe-inspo.png"
+  alt="Stripe API reference showing per-section Copy for LLM and View as Markdown buttons next to the Authentication heading"
+  style="width: 100%; margin-top: 16px; margin-bottom: 16px;"
+/>
+
+<img
+  src="/assets/visa-design-system/page-actions-exploration.png"
+  alt="FigJam board showing placement exploration across page types, per-section, and per-page approaches with annotated wireframes"
+  style="width: 100%; margin-top: 16px; margin-bottom: 24px;"
+/>
+
+I explored three distinct placements:
+
+**Per-section buttons at each h2.** The Stripe model — surfacing copy actions at the section level so users could grab exactly what they needed. The problem: VPDS pages have introductory content that sits above the first heading, so section-level buttons would silently omit it. On code pages with version and library dropdowns, the scope got even murkier: copy this section for which version, which library?
+
+**Floating buttons near the page h1.** A page-level action with clear scope that stays visible as users scroll. But VPDS component pages open with Code / Usage / Accessibility tabs, which immediately raised a question: does the copy include the current tab, or all three? Either answer created confusion about what the user was actually getting.
+
+**Right sidebar, above "On This Page."** What shipped. The sidebar placement makes scope obvious before you click — it's the whole page, the thing the sidebar already describes. No layout shift, no interaction with tab state, and it lives in the same column as the table of contents, where utility tooling naturally belongs.
+
+<img
+  src="/assets/visa-design-system/page-actions-wireframe-before.png"
+  alt="Wireframe of the Accordion component page sidebar showing only the ON THIS PAGE section with no page actions yet"
+  style="width: 100%; margin-top: 16px; margin-bottom: 16px;"
+/>
+
+<img
+  src="/assets/visa-design-system/page-actions-wireframe-after.png"
+  alt="Wireframe of the same sidebar with Copy page for LLM and View as markdown links added above the ON THIS PAGE navigation"
+  style="width: 100%; margin-bottom: 24px;"
+/>
+
 <img
   src="/assets/visa-design-system/page-actions-context.png"
   alt="Full Accordion component page on design.visa.com showing the Page Actions sidebar on the right with Copy for LLM and View as markdown links"
@@ -40,17 +74,17 @@ The team's goal was to make VPDS documentation AI-ready. The question was how to
   style="width: 200px; margin-bottom: 16px;"
 />
 
-The actions needed to be discoverable without adding noise to an already content-dense documentation page. I explored several placements — fixed in the global header, pinned to the page content area, floating in the corner — and landed on a location that kept the actions visible in context without competing with the primary content hierarchy.
-
-The audience informed this decision throughout. Developers familiar with design system docs have a high tolerance for utility-focused interfaces. I kept labeling concise and assumed familiarity with concepts like markdown rather than over-explaining.
+The audience informed the details throughout. Developers reading documentation sidebars have a high tolerance for utility-focused interfaces. I kept labels direct and assumed familiarity with markdown rather than over-explaining.
 
 ### Interaction model
 
 I designed two complementary actions:
 
-**Copy as markdown** copies the current page's content to the clipboard in one click — the fastest path from docs to LLM prompt. **View markdown** opens the raw markdown in a new tab, letting users preview and selectively copy sections before pasting.
+**Copy for LLM** copies the current page's content to the clipboard in one click — the fastest path from docs to LLM prompt. **View markdown** opens the raw markdown in a new tab, letting users preview and selectively copy sections before pasting.
 
-Each action includes confirmation feedback so users know it worked. The copy action shows a toast; the view action opens the new tab immediately, which is its own confirmation.
+The label "Copy for LLM" was questioned in review — it can read as robotic or tool-specific. But for this audience, the precision is the point: developers reaching for this button know what an LLM is and why they'd copy docs for one. Softening the label would trade clarity for tone.
+
+Each action includes confirmation feedback so users know it worked. The copy action shows a toast — essential for keyboard users who can't see a cursor change. The view action carries an aria-label noting it opens in a new tab, which serves as its own confirmation.
 
 ### Markdown conversion quality
 
