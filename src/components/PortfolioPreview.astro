@@ -5,12 +5,12 @@ interface Props {
   project: CollectionEntry<'work'>;
 }
 
-const { data, slug } = Astro.props.project;
+const { data, id } = Astro.props.project;
 ---
 
 <a
   class="card rt-BaseCard rt-Card rt-r-size-2 rt-variant-surface"
-  href={`/work/${slug}`}
+  href={`/work/${id}`}
 >
   <div class="img-wrapper">
     <img
