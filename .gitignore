@@ -19,6 +19,9 @@ pnpm-debug.log*
 .env
 .env.production
 
+# confidential / NDA case studies — kept local, shared on request, never published
+private/
+
 # macOS-specific files
 .DS_Store
 

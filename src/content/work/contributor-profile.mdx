@@ -1,0 +1,57 @@
+---
+title: Contributor Profile Redesign
+img: /assets/contributor-profile/nda-placeholder.svg
+img_alt: A locked placeholder card reading "Under NDA — full case study available on request."
+publishDate: 2026-06-15 00:00:00
+description: |
+  I redesigned the contributor profile for an internal design-system collaboration platform — reframing it from a social/vanity profile into a contribution-and-trust signal, and shipping it under a mandate that shifted mid-flight. Full case study available on request.
+tags:
+  - Product Design
+  - UX
+  - Design Systems
+---
+
+import CallToAction from '../../components/CallToAction.astro';
+
+<aside class="nda-note">
+  🔒 This project is under NDA. The summary below is intentionally high-level — the full case study, process artifacts, and final designs are available on request.
+</aside>
+
+This was a contributor profile page for an internal platform where engineers publish, version, and adopt shared front-end patterns. The brief looked small — the page didn't exist, and the job was to make it. The real work was deciding what the page was _for_.
+
+**My role:** Sole designer — problem framing, audit, evaluation, and high-fidelity design.
+**Tools:** Figma.
+
+## The reframe
+
+Before designing, I built a quick working baseline of the page to map what user data was actually available — which fields existed, which were unreliable, and which I'd have to create. Left to defaults, that baseline looked like a social profile: avatar, contact details, favorites, view counts. It treated the contributor like a _visitor to a website_. But on an internal contribution platform, one question matters above all others: **can I trust this person's work enough to build on it?** A profile here isn't a vanity object — it's a _trust signal_. That single reframe drove every decision: cut consumption metrics, demote low-value identity, and promote the signals that establish credibility and maintenance.
+
+## The method
+
+I pressure-tested the thesis through three independent lenses rather than one:
+
+- **Content audit** — annotated every element of the baseline with a cut / revise / promote / keep rationale, forcing each pixel to defend itself against the trust thesis.
+- **Heuristic evaluation** — surfaced the states the baseline ignored: self-view vs. peer-view, empty states, and edit-mode boundaries.
+- **Competitive analysis** — studied how leading platforms handle contributor identity, then deliberately _rejected_ public-social-graph conventions in favor of internal-tool norms.
+
+## Designing under a moving target
+
+Partway through, the intended audience expanded dramatically — which strained the premise the entire design rested on. Rather than scramble a response to a target that hadn't settled, I made a scoping call: ship the version validated for the core user, and treat the audience expansion as the next research question. The redesign shipped in the product's launch, largely intact — turning the design from an untested concept into a falsifiable bet that real usage could now answer.
+
+## What I'd talk through
+
+The honest version of this project isn't a clean redesign — it's a clear thesis placed under uncertainty, with a deliberate plan to find out if it was right. The full case study covers the reframe in depth, the three-method process with artifacts, the moment the mandate shifted, the decision to ship anyway, and the specific v2 hypothesis early access is positioned to test.
+
+<CallToAction href="/#contact-cta">Request the full case study →</CallToAction>
+
+<style>{`
+  .nda-note {
+    border: 1px solid var(--gray-800);
+    border-radius: var(--border-radius);
+    background: var(--gray-999-basis, var(--gray-900));
+    padding: 16px 20px;
+    font-size: var(--text-md);
+    color: var(--gray-300);
+    margin-bottom: 8px;
+  }
+`}</style>
