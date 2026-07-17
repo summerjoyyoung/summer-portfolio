@@ -12,6 +12,12 @@ export const collections = {
 			tags: z.array(z.string()),
 			img: z.string(),
 			img_alt: z.string().optional(),
+			// Case-study rail. `year` falls back to publishDate when omitted.
+			role: z.string().optional(),
+			tools: z.string().optional(),
+			scope: z.string().optional(),
+			timeline: z.string().optional(),
+			year: z.string().optional(),
 		}),
 	}),
 };

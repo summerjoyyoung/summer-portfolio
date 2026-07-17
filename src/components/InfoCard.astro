@@ -1,0 +1,88 @@
+---
+interface Props {
+  role?: string | undefined;
+  tools?: string | undefined;
+  scope?: string | undefined;
+  timeline?: string | undefined;
+  year?: string | undefined;
+}
+
+const { role, tools, scope, timeline, year } = Astro.props;
+
+// Role and tools each get a full-width row; the short fields share a row below.
+const shortFields = [
+  timeline && { label: 'Timeline', value: timeline },
+  scope && { label: 'Scope', value: scope },
+  year && { label: 'Year', value: year },
+].filter((f): f is { label: string; value: string } => Boolean(f));
+---
+
+<dl class="info-card">
+  {
+    role && (
+      <div class="field">
+        <dt>Role</dt>
+        <dd>{role}</dd>
+      </div>
+    )
+  }
+  {
+    tools && (
+      <div class="field">
+        <dt>Tools</dt>
+        <dd>{tools}</dd>
+      </div>
+    )
+  }
+  {
+    shortFields.length > 0 && (
+      <div class="short-row">
+        {shortFields.map((f) => (
+          <div class="field">
+            <dt>{f.label}</dt>
+            <dd>{f.value}</dd>
+          </div>
+        ))}
+      </div>
+    )
+  }
+</dl>
+
+<style>
+  .info-card {
+    background: var(--gray-900);
+    border: 1px solid var(--gray-800);
+    border-radius: 14px;
+    padding: 20px;
+  }
+
+  .field + .field,
+  .short-row {
+    margin-top: 16px;
+  }
+
+  .short-row {
+    display: flex;
+    gap: 28px;
+  }
+
+  .short-row .field + .field {
+    margin-top: 0;
+  }
+
+  dt {
+    font-family: var(--font-brand);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 4px;
+  }
+
+  dd {
+    font-size: var(--text-sm);
+    color: var(--gray-100);
+    line-height: 1.5;
+  }
+</style>

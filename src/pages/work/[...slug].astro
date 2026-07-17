@@ -4,12 +4,10 @@ import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 import ContactCTA from '../../components/ContactCTA.astro';
-import Hero from '../../components/Hero.astro';
 import { ArrowLeftIcon } from '@radix-ui/react-icons';
 import Pill from '../../components/Pill.astro';
-import TableOfContents, {
-  type Heading,
-} from '../../components/TableOfContents.astro';
+import InfoCard from '../../components/InfoCard.astro';
+import ChapterNav, { type Chapter } from '../../components/ChapterNav.astro';
 
 interface Props {
   entry: CollectionEntry<'work'>;
@@ -27,58 +25,59 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content, headings: rawHeadings } = await render(entry);
+const { Content, headings } = await render(entry);
 
-// Extract H2 and H3 headings for table of contents
-function createSlug(text: string): string {
-  return text
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '');
-}
+// Only H2s become chapters — the numbering here has to line up with the
+// counter on the headings themselves, which also only counts H2s.
+const chapters: Chapter[] = headings
+  .filter((heading) => heading.depth === 2)
+  .map((heading) => ({ id: heading.slug, text: heading.text }));
 
-const headings: Heading[] = rawHeadings
-  .filter((heading: any) => heading.depth === 2 || heading.depth === 3)
-  .map((heading: any) => ({
-    id: createSlug(heading.text),
-    text: heading.text,
-    level: heading.depth,
-  }));
+const year = entry.data.year ?? String(entry.data.publishDate.getFullYear());
 ---
 
 <BaseLayout title={entry.data.title} description={entry.data.description}>
   <main class="page-layout">
-    <div class="page-header">
-      <a class="back-link link-underline" href="/work/"><ArrowLeftIcon width="1em" height="1em" aria-hidden="true" style={{ verticalAlign: 'middle' }} /> Work</a>
-      <Hero title={entry.data.title} align="start">
-        <div class="details">
-          <div class="tags">
-            {entry.data.tags.map((t) => <Pill>{t}</Pill>)}
-          </div>
-          <p class="description">{entry.data.description}</p>
+    <a class="back-link link-underline" href="/work/"
+      ><ArrowLeftIcon
+        width="1em"
+        height="1em"
+        aria-hidden="true"
+        style={{ verticalAlign: 'middle' }}
+      /> Work</a
+    >
+
+    <div class="case-hero">
+      <div class="case-hero-text">
+        <div class="tags">
+          {
+            entry.data.tags.map((tag, i) => (
+              <Pill variant={i === 0 ? 'accent' : 'neutral'}>{tag}</Pill>
+            ))
+          }
         </div>
-      </Hero>
-    </div>
-    <div class="page-content">
-      {
-        headings.length > 0 && (
-          <aside class="sidebar">
-            <TableOfContents headings={headings} />
-          </aside>
-        )
-      }
-      <div class="main-content">
-        {
-          entry.data.img && (
-            <img
-              src={entry.data.img}
-              alt={entry.data.img_alt || ''}
-              class="hero-image"
-            />
-          )
-        }
-        <Content />
+        <h1>{entry.data.title}</h1>
+        <p class="description">{entry.data.description}</p>
       </div>
+      <figure class="case-hero-media">
+        <img src={entry.data.img} alt={entry.data.img_alt || ''} />
+      </figure>
+    </div>
+
+    <div class="page-content">
+      <aside class="sidebar">
+        <InfoCard
+          role={entry.data.role}
+          tools={entry.data.tools}
+          scope={entry.data.scope}
+          timeline={entry.data.timeline}
+          year={year}
+        />
+        {chapters.length > 0 && <ChapterNav chapters={chapters} />}
+      </aside>
+      <article class="main-content">
+        <Content />
+      </article>
     </div>
   </main>
   <ContactCTA />
@@ -130,12 +129,23 @@ const headings: Heading[] = rawHeadings
 </script>
 
 <style>
-  .page-header {
+  /* Sized so the rail + gap + the article's 760px cap fill the content box
+     exactly, leaving no dead space to the right of the article. */
+  .page-layout {
+    --rail-width: 250px;
+    --rail-gap: 64px;
+    --article-width: 760px;
+
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    padding-bottom: 40px;
-    border-bottom: 1px solid var(--gray-800);
-    margin-bottom: 60px;
-    padding-inline: 0px;
+    max-width: calc(
+      var(--rail-width) + var(--rail-gap) + var(--article-width) + 48px * 2
+    );
+    margin-inline: auto;
+    padding-inline: 24px;
+    margin-bottom: 80px;
+    min-height: calc(100vh - 101px);
   }
 
   .back-link {
@@ -143,40 +153,47 @@ const headings: Heading[] = rawHeadings
     margin-bottom: 8px;
   }
 
-  .details {
+  .case-hero {
     display: flex;
     flex-direction: column;
-    padding: 8px;
-    gap: 24px;
-    justify-content: space-between;
-    align-items: center;
+    gap: 32px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--gray-800);
+    margin-bottom: 40px;
+  }
+
+  .case-hero-text h1 {
+    font-size: var(--text-3xl);
+    line-height: 1.03;
+    letter-spacing: -0.015em;
+    color: var(--gray-0);
   }
 
   .tags {
     display: flex;
     gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .tags :global(.rt-Badge) {
+    font-family: var(--font-brand);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
 
   .description {
-    font-size: var(--text-lg);
-    max-width: 54ch;
+    font-size: var(--text-md);
+    line-height: 1.55;
+    margin-top: 18px;
+    text-wrap: pretty;
   }
 
-  .page-layout {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
+  .case-hero-media img {
     width: 100%;
-    max-width: 1328px;
-    margin-inline: auto;
-    padding-inline: 24px;
-    margin-bottom: 80px;
-    align-items: flex-start;
-    min-height: calc(100vh - 101px);
-  }
-
-  @media (min-width: 800px) {
-    .page-layout { padding-inline: 48px; }
+    border-radius: 16px;
+    border: 1px solid var(--gray-800);
   }
 
   .page-content {
@@ -185,28 +202,83 @@ const headings: Heading[] = rawHeadings
     gap: 32px;
   }
 
-  .sidebar { display: none; }
-
-  .main-content { flex: 1; min-width: 0; }
-
-  .hero-image {
-    width: 100%;
-    margin-bottom: 40px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--gray-800);
+  /* The info card carries role/tools, so it stays visible on narrow screens
+     stacked above the article. The chapter rail stays desktop-only. */
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
   }
 
-  .main-content > :global(* + *) { margin-top: 16px; }
+  .sidebar :global(.chapter-nav) {
+    display: none;
+  }
 
-  .main-content :global(h1),
-  .main-content :global(h2),
+  /* Two-column article: prose and figures in column 1, margin notes parked in
+     the gutter. Grid auto-placement lands a `.gutter-note` on the same row as
+     the block it follows, so notes sit beside their figure rather than below. */
+  .main-content {
+    --note-width: 190px;
+    --note-gap: 40px;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    counter-reset: chapter;
+  }
+
+  .main-content > :global(*) {
+    grid-column: 1;
+  }
+
+  /* Astro gives hydrated islands `display: contents`, which would hand grid
+     item status to the component's own root and let it auto-place into the
+     note gutter. Give the island a box so it stays in the content column. */
+  .main-content > :global(astro-island) {
+    display: block;
+  }
+
+  .main-content > :global(* + *) {
+    margin-top: 16px;
+  }
+
+  /* Direct children only: the counter has to stay in step with ChapterNav,
+     which numbers the top-level H2s the article was rendered with. */
+  .main-content > :global(h2) {
+    counter-increment: chapter;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border-top: 1px solid var(--gray-800);
+    padding-top: 34px;
+    margin-top: 56px;
+    margin-bottom: 22px;
+    color: var(--gray-0);
+    scroll-margin-top: 24px;
+  }
+
+  .main-content > :global(h2)::before {
+    content: counter(chapter, decimal-leading-zero);
+    font-family: var(--font-brand);
+    font-size: 44px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--accent-regular);
+  }
+
   .main-content :global(h3),
   .main-content :global(h4),
   .main-content :global(h5) {
-    margin-top: var(--space-7);
+    margin-top: var(--space-6);
     margin-bottom: var(--space-3);
-    scroll-margin-top: 32px;
+    scroll-margin-top: 24px;
+  }
+
+  /* Direct children only: Callout, Note and PullQuote set their own measure,
+     and a descendant selector here would override it. */
+  .main-content > :global(p) {
+    line-height: 1.78;
+    text-wrap: pretty;
   }
 
   .main-content :global(img) {
@@ -215,11 +287,19 @@ const headings: Heading[] = rawHeadings
     border: 1px solid var(--gray-800);
   }
 
+  .main-content :global(figcaption) {
+    font-size: 13px;
+    color: var(--gray-400);
+    margin-top: 12px;
+  }
+
   .main-content :global(.gifa11y-wrap) {
     position: relative;
   }
 
-  .main-content :global(blockquote) {
+  /* Plain markdown quotes only — PullQuote carries its own accent rule, and a
+     descendant selector would draw a second one inside it. */
+  .main-content > :global(blockquote) {
     font-size: var(--text-lg);
     font-family: var(--font-brand);
     font-weight: 600;
@@ -241,23 +321,59 @@ const headings: Heading[] = rawHeadings
   }
 
   @media (min-width: 800px) {
+    .page-layout {
+      padding-inline: 48px;
+    }
 
-    .page-content { flex-direction: row; }
+    .back-link {
+      display: block;
+    }
+
+    .case-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      padding-bottom: 60px;
+      margin-bottom: 56px;
+    }
+
+    .case-hero-text h1 {
+      font-size: var(--text-4xl);
+    }
+
+    .description {
+      font-size: 19px;
+    }
+
+    .page-content {
+      display: grid;
+      grid-template-columns: var(--rail-width) minmax(0, var(--article-width));
+      gap: var(--rail-gap);
+      align-items: start;
+    }
 
     .sidebar {
+      position: sticky;
+      top: 28px;
+      max-height: calc(100vh - 56px);
+      overflow-y: auto;
+    }
+
+    .sidebar :global(.chapter-nav) {
       display: block;
-      flex-shrink: 0;
-      width: 250px;
     }
 
-    .back-link { display: block; }
-
-    .details {
-      flex-direction: row;
-      gap: 40px;
+    .main-content {
+      grid-template-columns: minmax(0, 1fr) var(--note-width);
+      column-gap: var(--note-gap);
     }
 
-    .main-content :global(blockquote) {
+    .main-content > :global(.gutter-note) {
+      grid-column: 2;
+    }
+
+    .main-content > :global(blockquote) {
       font-size: var(--text-2xl);
     }
   }
