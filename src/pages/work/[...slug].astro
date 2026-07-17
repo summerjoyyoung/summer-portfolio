@@ -120,10 +120,17 @@ const year = entry.data.year ?? String(entry.data.publishDate.getFullYear());
   }
 
   // box-shadow and position are hardcoded inside gifa11y's shadow DOM.
-  // Inject overrides: remove the drop shadow and anchor the button to top-right.
+  // Inject overrides: remove the drop shadow and sit the button in the GIF's
+  // top-left corner, inset by the button's own 12px margin.
+  //
+  // gifa11y anchors the <gifa11y-button> host to the GIF's top-left corner via
+  // CSS anchor positioning, which leaves the host a zero-width box on that
+  // corner. So the button has to be pinned by top/left — pinning its right edge
+  // instead lays it out leftwards from a zero-width box, parking the whole
+  // button outside the GIF.
   document.querySelectorAll('.main-content gifa11y-button').forEach((host) => {
     const s = document.createElement('style');
-    s.textContent = 'button { box-shadow: none; inset: 0 0 auto auto; }';
+    s.textContent = 'button { box-shadow: none; inset: 0 auto auto 0; }';
     host.shadowRoot?.appendChild(s);
   });
 </script>
