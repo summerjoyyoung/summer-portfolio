@@ -1,5 +1,18 @@
+---
+interface Props {
+  /** `accent` fills the badge; `neutral` drops it back to a gray outline. */
+  variant?: 'outline' | 'accent' | 'neutral';
+}
+
+const { variant = 'outline' } = Astro.props;
+
+const rtVariant =
+  variant === 'accent' ? 'rt-variant-surface' : 'rt-variant-outline';
+const accentColor = variant === 'neutral' ? 'gray' : 'purple';
+---
+
 <span
-  class="rt-Badge rt-r-size-3 rt-variant-outline"
-  data-accent-color="purple"
+  class:list={['rt-Badge', 'rt-r-size-3', rtVariant]}
+  data-accent-color={accentColor}
   data-radius="full"><slot /></span
 >

@@ -8,23 +8,28 @@ description: |
 tags:
   - Design
   - Case Study
+role: Solo UX designer — research, IA, wireframing, prototyping, user testing, accessibility annotations, design system
+tools: Figma, Deque axe plugin, Maze (user testing)
+scope: End-to-end
 ---
 
 import ImageSlideshow from '../../components/ImageSlideshow';
+import Callout from '../../components/Callout.astro';
+import Note from '../../components/Note.astro';
+import PullQuote from '../../components/PullQuote.astro';
 
 PlutoPay is a responsive web app designed to give users a secure, unified place to manage their payment methods and make transactions online — without needing to carry or juggle multiple physical cards. This was a solo end-to-end UX project, from research through high-fidelity prototype, completed as part of my CareerFoundry UX/UI Design certification.
 
 The project received strong recognition from peers and instructors, and it was also an inflection point for me personally: coming in as a front-end engineer, designing with accessibility annotations from the start was something I could bring to the project from day one — and it shaped how I think about the design-to-engineering handoff to this day.
 
-**My role:** Solo UX designer — research, IA, wireframing, prototyping, user testing, accessibility annotations, design system
-**Tools:** Figma, Deque axe plugin, Maze (user testing)
-
-
 ## The Problem
 
 People who manage multiple payment methods online deal with a fragmented experience: different cards saved across different sites, no unified view of spending, and no easy way to set limits before hitting them. For users who are unbanked or prefer not to use traditional financial institutions, the gap is even wider.
 
-The opportunity was a single, secure app that consolidates payment methods, handles transactions without exposing card details, and gives users meaningful control over their spending — before they go over budget, not after.
+<Callout label="The opportunity">
+  One secure place to consolidate payment methods, pay without exposing card
+  details, and stop overspending — before the limit, not after.
+</Callout>
 
 
 ## Research and Discovery
@@ -71,6 +76,8 @@ The core insight: users want convenience and consolidation, but only if they tru
   ]}
 />
 
+<Note accent>Affinity mapping pulled 6 themes out of the noise.</Note>
+
 #### User Personas
 
 From the research themes, I defined three personas representing distinct relationships with digital payments. These weren't just demographic profiles — they captured different mental models, frustrations, and goals that I returned to when evaluating design decisions.
@@ -111,6 +118,7 @@ I mapped the current-state experience of each persona making an online purchase 
   ]}
 />
 
+<Note>Two pain points became the primary design targets.</Note>
 
 ## Ideation and Design
 
@@ -148,6 +156,7 @@ With the flows defined, I created a site map to establish the full information a
   style="width: 100%; margin-top: 16px;"
 />
 
+<Note>Cut top-level sections until the IA matched real tasks.</Note>
 
 ## Wireframing: Low to High
 
@@ -196,6 +205,10 @@ One early idea I was attached to: a **pay/request slider** that let users toggle
     },
   ]}
 />
+
+<PullQuote cite="The pay/request slider was a good failure — clarity beat cleverness.">
+  “79% of users wanted buttons with words on them.”
+</PullQuote>
 
 ### High Fidelity
 
@@ -256,6 +269,9 @@ With mid-fidelity testing complete, I moved into high-fidelity screens — estab
   ]}
 />
 
+<Note accent>
+  Error states got extra care — an unclear message is a trust problem.
+</Note>
 
 ## Prototyping and Testing
 
@@ -349,6 +365,7 @@ I intentionally modeled this closely on Material Design. As someone newer to des
   ]}
 />
 
+<Note>Learn a system's conventions before diverging from it.</Note>
 
 ## Reflections
 

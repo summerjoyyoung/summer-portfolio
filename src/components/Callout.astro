@@ -1,0 +1,46 @@
+---
+interface Props {
+  label?: string;
+}
+
+const { label = 'The opportunity' } = Astro.props;
+---
+
+<aside class="callout">
+  <p class="callout-label">{label}</p>
+  <div class="callout-body"><slot /></div>
+</aside>
+
+<style>
+  .callout {
+    border: 1px solid var(--gray-800);
+    border-inline-start: 3px solid var(--accent-regular);
+    background: var(--gray-900);
+    border-radius: var(--border-radius);
+    padding: 22px 26px;
+    margin-block: 30px 8px;
+  }
+
+  .callout-label {
+    font-family: var(--font-brand);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+    margin-bottom: 8px;
+  }
+
+  .callout-body {
+    font-family: var(--font-brand);
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--gray-0);
+    text-wrap: pretty;
+  }
+
+  .callout-body :global(* + *) {
+    margin-top: 12px;
+  }
+</style>

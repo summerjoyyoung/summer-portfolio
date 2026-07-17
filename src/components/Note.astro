@@ -1,0 +1,53 @@
+---
+interface Props {
+  label?: string;
+  /** Accent the rule to mark the note as a key takeaway rather than an aside. */
+  accent?: boolean;
+}
+
+const { label = 'Note', accent = false } = Astro.props;
+---
+
+<aside class:list={['gutter-note', { accent }]}>
+  <p class="note-label">{label}</p>
+  <div class="note-body"><slot /></div>
+</aside>
+
+<style>
+  /* Placed into the article grid's right-hand gutter by the case-study page;
+     falls back to a full-width block on narrow screens. */
+  .gutter-note {
+    align-self: start;
+    border-inline-start: 2px solid var(--gray-700);
+    padding-inline-start: 12px;
+  }
+
+  .gutter-note.accent {
+    border-inline-start-color: var(--accent-regular);
+  }
+
+  .note-label {
+    font-family: var(--font-brand);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 5px;
+  }
+
+  .gutter-note.accent .note-label {
+    color: var(--accent-dark);
+  }
+
+  .note-body {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--gray-300);
+    text-wrap: pretty;
+  }
+
+  .note-body :global(* + *) {
+    margin-top: 10px;
+  }
+</style>

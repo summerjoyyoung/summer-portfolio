@@ -1,0 +1,54 @@
+---
+interface Props {
+  /** Line printed under the quote — context or attribution. */
+  cite?: string | undefined;
+}
+
+const { cite } = Astro.props;
+---
+
+<figure class="pull-quote">
+  <blockquote class="quote"><slot /></blockquote>
+  {cite && <figcaption class="cite">{cite}</figcaption>}
+</figure>
+
+<style>
+  .pull-quote {
+    margin-block: 8px 56px;
+    padding: 8px 0 8px 26px;
+    border-inline-start: 4px solid var(--accent-regular);
+  }
+
+  /* The accent rule belongs to the figure, so the quote itself stays bare. */
+  .pull-quote .quote {
+    border: none;
+    padding: 0;
+    font-family: var(--font-brand);
+    font-size: var(--text-xl);
+    font-weight: 600;
+    line-height: 1.28;
+    letter-spacing: -0.01em;
+    color: var(--gray-0);
+    text-wrap: pretty;
+  }
+
+  .pull-quote .quote :global(p) {
+    line-height: inherit;
+  }
+
+  .pull-quote .quote :global(p + p) {
+    margin-top: 12px;
+  }
+
+  .pull-quote .cite {
+    font-size: var(--text-sm);
+    color: var(--gray-400);
+    margin-top: 12px;
+  }
+
+  @media (min-width: 800px) {
+    .pull-quote .quote {
+      font-size: 30px;
+    }
+  }
+</style>
