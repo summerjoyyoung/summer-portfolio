@@ -5,6 +5,11 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
+    ignore:
+      # @astrojs/check peer-requires typescript ^5 || ^6, so a v7 bump breaks
+      # `npm ci`. Drop this once @astrojs/check supports typescript 7.
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
