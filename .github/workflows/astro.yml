@@ -17,11 +17,14 @@ permissions:
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+# Scope concurrency per ref so PR builds no longer cancel each other; a single
+# shared "pages" group meant any two open PRs contended for one slot.
+# Deployments still serialize, since only pushes to main land in the main group,
+# and they are never cancelled so production rollouts complete.
+# Superseded runs on the same PR are cancelled, as only the latest commit matters.
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  group: "pages-${{ github.ref }}"
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
   BUILD_PATH: "." # default value when not using subfolders
