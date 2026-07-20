@@ -10,44 +10,87 @@ import LayoutContainer from '../components/LayoutContainer.tsx';
 import LayoutFlex from '../components/LayoutFlex.tsx';
 
 const projects = (await getCollection('work')).sort(
-	(a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
 );
 ---
 
 <BaseLayout
-	title="Work"
-	description="Learn about Summer Youngs's most recent projects"
+  title="Work"
+  description="Learn about Summer Youngs's most recent projects"
 >
-	<LayoutFlex gap="9">
-		<LayoutContainer as="main">
-			<LayoutFlex gap="6">
-				<Hero
-					title="My Work"
-					tagline="See my most recent projects below to get an idea of my past experience."
-					align="start"
-				/>
-				<ul class="work-list">
-					{
-						projects.map((project) => (
-							<li>
-								<PortfolioPreview project={project} />
-							</li>
-						))
-					}
-				</ul>
-			</LayoutFlex>
-		</LayoutContainer>
-		<ContactCTA />
-	</LayoutFlex>
+  <LayoutFlex gap="9">
+    <LayoutContainer as="main">
+      <LayoutFlex gap="6">
+        <div class="work-header">
+          <Hero
+            title="Work"
+            tagline="Selected design-systems, product design, and front-end engineering work from the last few years."
+            align="start"
+            compact
+          />
+          <p class="count">{projects.length} projects</p>
+        </div>
+        <ul class="work-list">
+          {
+            projects.map((project) => (
+              <li>
+                <PortfolioPreview project={project} />
+              </li>
+            ))
+          }
+        </ul>
+      </LayoutFlex>
+    </LayoutContainer>
+    <ContactCTA />
+  </LayoutFlex>
 </BaseLayout>
 
 <style>
-	.work-list {
-		display: flex;
-		flex-direction: column;
-		gap: 16px;
-		list-style: none;
-		padding: 0;
-		margin: 0;
-	}
+  .work-header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .count {
+    margin: 0;
+    font-family: var(--font-brand);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray-400);
+    white-space: nowrap;
+    /* Hero is centered until 800px, so the count follows it. */
+    text-align: center;
+  }
+
+  .work-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Stretch each card to its grid row so paired cards stay level. */
+  .work-list li {
+    display: flex;
+  }
+
+  @media (min-width: 800px) {
+    .work-header {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .count {
+      padding-bottom: 6px;
+    }
+
+    .work-list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
 </style>

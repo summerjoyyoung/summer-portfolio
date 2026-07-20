@@ -5,12 +5,22 @@ interface Props {
   align?: 'start' | 'center';
   meta?: string;
   large?: boolean;
+  /** Index-page scale: a tighter title that sits above a list rather than
+      opening the page on its own. */
+  compact?: boolean;
 }
 
-const { align = 'center', tagline, title, meta, large = false } = Astro.props;
+const {
+  align = 'center',
+  tagline,
+  title,
+  meta,
+  large = false,
+  compact = false,
+} = Astro.props;
 ---
 
-<div class:list={['hero', align, { large }]}>
+<div class:list={['hero', align, { large, compact }]}>
   {meta && <div class="hero-meta">{meta}</div>}
   <div class="hero-text">
     <h1 class="title">{title}</h1>
@@ -43,6 +53,22 @@ const { align = 'center', tagline, title, meta, large = false } = Astro.props;
   .title {
     font-size: var(--text-3xl);
     color: var(--gray-0);
+  }
+
+  .compact .title {
+    font-size: var(--text-2xl);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .compact {
+    gap: var(--space-3);
+    font-size: var(--text-base);
+  }
+
+  .compact .tagline {
+    line-height: 1.6;
+    max-width: 52ch;
   }
 
   /* Metadata caption — "Seattle, WA · Design Engineer" with extending rule */
@@ -91,6 +117,15 @@ const { align = 'center', tagline, title, meta, large = false } = Astro.props;
 
     .large .title {
       font-size: var(--text-5xl);
+    }
+
+    /* Holds at the base scale instead of stepping up with the other heroes. */
+    .compact {
+      font-size: var(--text-md);
+    }
+
+    .compact .title {
+      font-size: var(--text-3xl);
     }
   }
 </style>
