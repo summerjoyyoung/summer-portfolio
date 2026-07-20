@@ -6,13 +6,15 @@ interface Props {
 }
 
 const { data, id } = Astro.props.project;
+
+const year = data.year ?? String(data.publishDate.getFullYear());
+// The most specific tag reads as the project's discipline ("Design Systems",
+// "Case Study") — the broader ones ("Design", "Engineering") come first.
+const discipline = data.tags.at(-1);
 ---
 
-<a
-  class="card rt-BaseCard rt-Card rt-r-size-2 rt-variant-surface"
-  href={`/work/${id}`}
->
-  <div class="img-wrapper">
+<a class="card" href={`/work/${id}`}>
+  <div class="cover">
     <img
       src={data.img}
       alt={data.img_alt || ''}
@@ -21,8 +23,12 @@ const { data, id } = Astro.props.project;
     />
   </div>
   <div class="content">
-    <span class="title">{data.title}</span>
+    <div class="heading">
+      <span class="title">{data.title}</span>
+      <span class="year">{year}</span>
+    </div>
     <p class="description">{data.description}</p>
+    {discipline && <div class="discipline">{discipline}</div>}
   </div>
 </a>
 
@@ -32,74 +38,123 @@ const { data, id } = Astro.props.project;
     flex-direction: row;
     align-items: center;
     gap: 20px;
-    padding: 16px 20px;
+    width: 100%;
+    padding: 16px;
+    background: var(--gray-999);
+    border: 1px solid var(--gray-800);
+    border-radius: 14px;
     text-decoration: none;
     transition:
+      transform var(--theme-transition),
       box-shadow var(--theme-transition),
-      transform var(--theme-transition);
+      border-color var(--theme-transition);
   }
 
   .card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent-overlay);
   }
 
-  .img-wrapper {
-    width: 112px;
-    height: 80px;
-    flex-shrink: 0;
+  .cover {
+    flex: 0 0 88px;
+    width: 88px;
+    height: 88px;
     overflow: hidden;
-    border-radius: var(--border-radius);
+    background: var(--gray-900);
+    border: 1px solid var(--gray-800);
+    border-radius: 10px;
   }
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card:hover img {
+    transform: scale(1.04);
   }
 
   .content {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+    flex: 1;
     min-width: 0;
+  }
+
+  .heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
   }
 
   .title {
     font-family: var(--font-brand);
-    font-size: var(--text-lg);
-    font-weight: 500;
+    font-size: var(--text-md);
+    font-weight: 600;
+    letter-spacing: -0.01em;
     color: var(--gray-0);
+    transition: color var(--theme-transition);
+  }
+
+  .card:hover .title {
+    color: var(--accent-dark);
+  }
+
+  .year {
+    font-size: 13px;
+    color: var(--gray-400);
+    white-space: nowrap;
   }
 
   .description {
+    margin: 6px 0 0;
     font-size: var(--text-sm);
-    color: var(--gray-400);
-    margin: 0;
+    color: var(--gray-200);
+    text-wrap: pretty;
+    /* Clamped so cards keep an even rhythm across the grid — the source
+       descriptions run much longer than the blurbs in the design. */
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
 
-  @media (min-width: 800px) {
-    .card {
-      gap: 28px;
-      padding: 20px 24px;
-    }
+  .discipline {
+    margin-top: 10px;
+    font-family: var(--font-brand);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+  }
 
-    .img-wrapper {
-      width: 160px;
-      height: 112px;
-      border-radius: var(--border-radius);
+  @media (min-width: 800px) {
+    .cover {
+      flex-basis: 108px;
+      width: 108px;
+      height: 108px;
     }
 
     .title {
-      font-size: var(--text-xl);
+      font-size: var(--text-lg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card,
+    img {
+      transition: none;
     }
 
-    .description {
-      font-size: var(--text-base);
-      -webkit-line-clamp: 3;
+    .card:hover {
+      transform: none;
+    }
+
+    .card:hover img {
+      transform: none;
     }
   }
 </style>
