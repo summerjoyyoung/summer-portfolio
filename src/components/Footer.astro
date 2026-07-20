@@ -2,7 +2,7 @@
 const currentYear = new Date().getFullYear();
 ---
 
-<footer>
+<footer class="content-column">
   <div class="group">
     <p>&copy; {currentYear} Summer Young</p>
   </div>
@@ -25,12 +25,14 @@ const currentYear = new Date().getFullYear();
   </p>
 </footer>
 <style>
+  /* Horizontal edges come from .content-column so the footer lines up with
+     the nav and the page content above it. */
   footer {
     display: flex;
     flex-direction: column;
     gap: 48px;
     margin-top: auto;
-    padding: 48px 32px 48px;
+    padding-block: 48px;
     text-align: center;
     color: var(--gray-400);
     font-size: var(--text-sm);
@@ -57,8 +59,7 @@ const currentYear = new Date().getFullYear();
     footer {
       flex-direction: row;
       justify-content: space-between;
-      padding: 40px 80px;
-      margin-inline: 24px;
+      padding-block: 40px;
     }
 
     .group {

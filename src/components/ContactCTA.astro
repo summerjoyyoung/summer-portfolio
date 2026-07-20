@@ -4,39 +4,50 @@ import { PaperPlaneIcon } from '@radix-ui/react-icons';
 ---
 
 <aside>
-	<h2>Interested in working together?</h2>
-	<CallToAction href="mailto:summer.joy.young@gmail.com">
-		Send Me a Message
-		<PaperPlaneIcon width="1.2em" height="1.2em" aria-hidden="true" />
-	</CallToAction>
+  <div class="inner content-column">
+    <h2>Interested in working together?</h2>
+    <CallToAction href="mailto:summer.joy.young@gmail.com">
+      Send Me a Message
+      <PaperPlaneIcon width="1.2em" height="1.2em" aria-hidden="true" />
+    </CallToAction>
+  </div>
 </aside>
 
 <style>
-	aside {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 48px;
-		border-top: 1px solid var(--gray-800);
-		padding: 80px 24px;
-	}
+  /* The rule stays full-bleed; only the content sits in the shared column,
+     so the heading and button line up with the page content above. */
+  aside {
+    border-top: 1px solid var(--gray-800);
+    padding-block: 80px;
+  }
 
-	h2 {
-		font-size: var(--text-xl);
-		text-align: center;
-	}
+  .inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+  }
 
-	@media (min-width: 800px) {
-		aside {
-			padding: 120px;
-			flex-direction: row;
-			flex-wrap: wrap;
-			justify-content: space-between;
-		}
+  h2 {
+    font-size: var(--text-xl);
+    text-align: center;
+  }
 
-		h2 {
-			font-size: var(--text-3xl);
-			text-align: left;
-		}
-	}
+  @media (min-width: 800px) {
+    aside {
+      padding-block: 120px;
+    }
+
+    .inner {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    h2 {
+      font-size: var(--text-3xl);
+      text-align: left;
+    }
+  }
 </style>
