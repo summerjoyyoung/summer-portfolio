@@ -18,3 +18,6 @@ Chegg
 Premade
 Tremaine
 
+wordmark
+textlogo
+throughline

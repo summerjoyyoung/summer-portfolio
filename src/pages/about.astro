@@ -5,47 +5,80 @@ import ContactCTA from '../components/ContactCTA.astro';
 import Hero from '../components/Hero.astro';
 import LayoutContainer from '../components/LayoutContainer.tsx';
 import LayoutFlex from '../components/LayoutFlex.tsx';
+import Timeline from '../components/Timeline.astro';
+
+const events = [
+  {
+    year: '2019',
+    place: 'Seattle, WA',
+    title: 'Engineer, with a design habit',
+    body: 'Graduated from UW with a B.S. in Informatics and a B.A. in English Literature, and shipped a browser-based visual novel about living with invisible illness.',
+    more: 'The English degree was never a detour. Writing and structure turned out to be the same instinct that would later pull me toward design systems.',
+    note: 'Won Informatics Best Project 2019. Co-authored a user-centered design paper along the way — the design thread was there from the start.',
+    stat: 'UW · Informatics + English Lit',
+  },
+  {
+    year: '2019',
+    place: 'Best Buy Health · Seattle',
+    title: 'Software Engineer',
+    body: 'Built front-end features for LivelyLink, a React Native app caregivers use to monitor senior health. Stood up the app’s Storybook component library from scratch with a designer.',
+    more: 'Building a component library from nothing, sitting next to a designer, is where I first stopped seeing engineering and design as two separate jobs.',
+    note: 'Fixed a company-wide accessibility bug in React Navigation that had no documented workaround, and published the fix org-wide.',
+    stat: 'React Native · Storybook',
+    logo: 'best-buy' as const,
+  },
+  {
+    year: '2022',
+    place: 'Visa · Seattle',
+    title: 'Senior Software Engineer',
+    body: 'Led UI development on enterprise internal products in Visa’s Acceptance Solutions org. Stepped into the UI lead role and shipped 3 major releases across complex legacy systems.',
+    more: 'Inheriting a pile of undocumented legacy code taught me the lesson that still shapes how I work: the kindest thing you can ship is documentation.',
+    note: 'Migrated 4 products from a shared monolith to independent repos, and drove accessibility practices across the team — recognized by management as a force multiplier.',
+    stat: 'UI Lead · Acceptance Solutions',
+    logo: 'visa' as const,
+  },
+  {
+    year: '2024',
+    place: 'CareerFoundry',
+    title: 'Made the pivot to design',
+    body: 'Earned a UX/UI Design certificate and ran two solo, end-to-end case studies — research through high-fidelity prototype — bringing accessibility annotations in from day one.',
+    more: 'Designing the accessibility annotations from day one wasn’t a checkbox. It was me trying to be the kind of designer I wished I’d been handed specs from.',
+    note: 'Coming from engineering, I designed the handoffs I wish I’d been given.',
+    stat: 'UX/UI Certificate',
+    links: [
+      { href: '/work/pluto-pay', label: 'PlutoPay' },
+      { href: '/work/vocab-app', label: 'Vocabulary App' },
+    ],
+  },
+  {
+    year: 'Now',
+    place: 'Visa · Seattle',
+    title: 'Sr. Design Engineer',
+    body: 'Building and maintaining the public Visa Product Design System at design.visa.com — 14,000+ users, serving design consistency and front-end across the org. I design and build, end to end.',
+    more: 'The throughline turned out to be simple: make the next person’s work easier than mine was. Every role since has been a variation on that.',
+    note: 'Took the system public: shipped the code switcher, page actions, and the Patterns code tab; closed 10 of 10 security findings; held 100% uptime.',
+    stat: 'design.visa.com',
+    logo: 'visa' as const,
+    links: [
+      { href: '/work/vpds-public-launch', label: 'VPDS Public Launch' },
+      { href: '/work/page-actions', label: 'Page Actions' },
+      { href: '/work/code-switcher', label: 'Code Switcher' },
+      { href: '/work/patterns', label: 'VPDS Patterns' },
+    ],
+  },
+];
 ---
 
 <BaseLayout title="About" description="About Summer Young">
   <LayoutFlex gap="9">
     <LayoutContainer as="main" className="about">
-      <Hero title="About" align="start" />
+      <Hero
+        title="From engineer to design engineer"
+        tagline="I started in front-end engineering and kept drifting toward the design underneath it. Here's the path that turned into a design-systems career — and what each stop taught me."
+        compact
+      />
 
-      <section>
-        <h2 class="section-title">How I got here</h2>
-        <div class="content">
-          <p>
-            I came to design engineering sideways. A mislabeled college class turned out to be
-            about rhetoric and multimodal storytelling, and a professor who drew unexpected lines
-            between English literature and UX design changed the direction of everything. I ended
-            up with a double degree in Informatics and English Literature, more coding classes than
-            I planned, and a perspective on interfaces that I couldn't have gotten any other way.
-          </p>
-        </div>
-      </section>
-
-      <section>
-        <h2 class="section-title">What I care about</h2>
-        <div class="content">
-          <p>
-            The through-line across my work has always been accessibility — not as a compliance
-            checklist, but as something I believe in personally. I grew up watching my mother
-            struggle with a world not built for her, from navigating stairs to deciphering web
-            content that had moved far past what felt approachable. That stayed with me. It's part
-            of why I chose to work on LivelyLink, an aging-in-place app for caregivers. It's part
-            of why my college capstone was a visual novel about invisible illness, built to validate
-            people whose experiences were being dismissed before that conversation was mainstream.
-            And it's part of why I've spent my career advocating for accessibility practices on
-            every team I've been on.
-          </p>
-          <p>
-            My perspective is that disability is universal and inevitable. It's not a matter of if,
-            but when — and the gap between an accessible product and an inaccessible one is the gap
-            between someone being included or left out. That's what keeps me invested in the work.
-          </p>
-        </div>
-      </section>
+      <Timeline events={events} />
     </LayoutContainer>
 
     <ContactCTA />
@@ -56,31 +89,6 @@ import LayoutFlex from '../components/LayoutFlex.tsx';
   .about {
     display: flex;
     flex-direction: column;
-    gap: 56px;
-    max-width: 65ch;
-  }
-
-  section {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    color: var(--gray-200);
-  }
-
-  .section-title {
-    font-size: var(--text-xl);
-    color: var(--gray-0);
-  }
-
-  .content {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  @media (min-width: 800px) {
-    section {
-      font-size: var(--text-lg);
-    }
+    gap: 64px;
   }
 </style>
