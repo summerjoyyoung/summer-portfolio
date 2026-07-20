@@ -2,37 +2,57 @@
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 ---
 
-<button class="back-to-top" aria-label="Back to top">
-  Back to top
-  <ArrowRightIcon width="1em" height="1em" aria-hidden="true" />
-</button>
+<div class="back-to-top-anchor content-column">
+  <button class="back-to-top" aria-label="Back to top">
+    Back to top
+    <ArrowRightIcon width="1em" height="1em" aria-hidden="true" />
+  </button>
+</div>
 
 <style>
-  .back-to-top {
-    /* Position */
+  /* A full-width fixed strip carrying the shared content column, so the
+     button's right edge lands on the same edge as the nav and footer. Pinning
+     the button itself with `right` would measure from the viewport instead,
+     and a 100vw calc would drift by the scrollbar width. */
+  .back-to-top-anchor {
     position: fixed;
-    bottom: 112px;
-    right: 32px;
+    left: 0;
+    right: 0;
+    /* Sits low and out of the way while scrolling. The script raises it as the
+       footer comes into view so it never covers the footer, landing just above
+       it at the end of the page. */
+    bottom: var(--btt-offset, 24px);
     z-index: 50;
+    display: flex;
+    justify-content: flex-end;
+    /* The strip spans the viewport, so it must not swallow clicks. */
+    pointer-events: none;
+  }
 
+  .back-to-top {
     /* Layout */
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
 
-    /* Sizing — mirrors Radix rt-r-size-2 */
-    height: var(--space-6);
-    padding-inline: var(--space-3);
+    /* Sizing — 44px min height meets the WCAG 2.5.5 (AAA) 44x44 target size,
+       which the previous 32px missed. min-height rather than height so the
+       label can't be clipped if the font scales up. */
+    min-height: 44px;
+    padding-inline: var(--space-4);
     border-radius: var(--border-radius-full);
 
-    /* Appearance — exact tokens Radix outline variant uses */
+    /* Appearance — Radix outline variant tokens, plus a drop shadow so the
+       button separates from whatever content it floats over. */
     background-color: var(--gray-999);
-    box-shadow: inset 0 0 0 1px var(--accent-a8);
+    box-shadow:
+      inset 0 0 0 1px var(--accent-a8),
+      var(--shadow-md);
     color: var(--accent-a11);
     font-family: var(--default-font-family);
-    font-size: var(--font-size-2);
-    line-height: var(--line-height-2);
-    letter-spacing: var(--letter-spacing-2);
+    font-size: var(--font-size-3);
+    line-height: var(--line-height-3);
+    letter-spacing: var(--letter-spacing-3);
     font-weight: 500;
     cursor: pointer;
     border: none;
@@ -51,14 +71,18 @@ import { ArrowRightIcon } from '@radix-ui/react-icons';
     .back-to-top:hover {
       background-color: var(--accent-9);
       color: var(--accent-contrast);
-      box-shadow: inset 0 0 0 1px var(--accent-9);
+      box-shadow:
+        inset 0 0 0 1px var(--accent-9),
+        var(--shadow-md);
     }
   }
 
   .back-to-top:active {
     background-color: var(--accent-10);
     color: var(--accent-contrast);
-    box-shadow: inset 0 0 0 1px var(--accent-10);
+    box-shadow:
+      inset 0 0 0 1px var(--accent-10),
+      var(--shadow-md);
   }
 
   .back-to-top.visible {
@@ -73,21 +97,56 @@ import { ArrowRightIcon } from '@radix-ui/react-icons';
 </style>
 
 <script>
-  function initBackToTop() {
-    const btn = document.querySelector('.back-to-top');
-    if (!btn) return;
+  /** Resting gap between the button and the top of the footer. */
+  const FOOTER_GAP = 12;
+  /** How low the button sits while there's still page left to scroll. */
+  const SCROLLING_OFFSET = 24;
 
-    window.addEventListener(
-      'scroll',
-      () => {
-        btn.classList.toggle('visible', window.scrollY > 200);
-      },
-      { passive: true }
-    );
+  function initBackToTop() {
+    const btn = document.querySelector<HTMLElement>('.back-to-top');
+    const anchor = document.querySelector<HTMLElement>('.back-to-top-anchor');
+    if (!btn || !anchor) return;
+
+    // Both DOMContentLoaded and astro:page-load can fire for one page, so
+    // bail if this button already has its listeners.
+    if (btn.dataset.bttReady) return;
+    btn.dataset.bttReady = '1';
+
+    const footer = document.querySelector('footer');
+
+    let queued = false;
+    const update = () => {
+      queued = false;
+      btn.classList.toggle('visible', window.scrollY > 200);
+
+      // How far the footer reaches up into the viewport. While it's still
+      // below the fold this is <= 0 and the button stays at its low offset;
+      // as the footer scrolls in, the button rides up ahead of it.
+      let offset = SCROLLING_OFFSET;
+      if (footer) {
+        const intrusion =
+          window.innerHeight - footer.getBoundingClientRect().top;
+        if (intrusion > 0) offset = Math.max(offset, intrusion + FOOTER_GAP);
+      }
+      anchor.style.setProperty('--btt-offset', `${offset}px`);
+    };
+
+    // Scroll fires far more often than we can paint, so coalesce to one
+    // measurement per frame — getBoundingClientRect forces layout.
+    const onScroll = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(update);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
 
     btn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+
+    update();
   }
 
   document.addEventListener('DOMContentLoaded', initBackToTop);
