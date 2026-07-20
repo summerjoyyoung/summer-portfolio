@@ -217,8 +217,11 @@ const textLinks: { label: string; href: string }[] = [
       display: grid;
       grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      padding: 40px 48px;
-      margin-inline: 56px;
+      /* Matches the shared content column so the site title and theme toggle
+         sit on the same edges as the page content below them. */
+      max-width: var(--content-max-width);
+      margin-inline: auto;
+      padding: 40px var(--content-padding-inline);
       gap: 16px;
     }
 
@@ -268,7 +271,6 @@ const textLinks: { label: string; href: string }[] = [
       background-color: transparent;
       box-shadow: none;
     }
-
   }
 
   @media (forced-colors: active) {
