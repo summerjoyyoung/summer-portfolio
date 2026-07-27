@@ -16,7 +16,7 @@
     "spellcheck:fix": "cspell \"**/*.{md,mdx,astro,ts,js,json}\" --no-must-find-files"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.9",
+    "@astrojs/check": "^0.9.10",
     "@astrojs/mdx": "^7.0.3",
     "@astrojs/react": "^6.0.1",
     "@radix-ui/colors": "^3.0.0",
