@@ -1,10 +1,5 @@
 # Summer's Portfolio
 
-## To Do
-- [x] Add a table of contents to work pages
-- [ ] Add slideshow component for images on work pages
-- [ ] Add a VPDS work page
-
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
