@@ -31,7 +31,7 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@playwright/test": "^1.65.0",
+    "@playwright/test": "^1.65.1",
     "@typescript-eslint/parser": "^8.72.1",
     "cspell": "^10.5.0",
     "eslint": "^10.14.0",
